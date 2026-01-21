@@ -2,7 +2,7 @@
 
 A premium, immersive portfolio website designed to showcase Data Engineering expertise through modern web technologies. Built with a focus on performance, aesthetics, and user experience using the "Scrollytelling" narrative approach.
 
-![Portfolio Preview](public/og.png)
+
 
 ## ✨ Key Features
 
