@@ -15,6 +15,18 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       touchMultiplier: 2,
     })
 
+    // Handle scroll position based on navigation type
+    const navigationEntries = performance.getEntriesByType('navigation')
+    if (navigationEntries.length > 0) {
+      const navigationEntry = navigationEntries[0] as PerformanceNavigationTiming
+      if (navigationEntry.type !== 'reload') {
+        lenis.scrollTo(0, { immediate: true })
+      }
+    } else {
+      // Fallback for browsers that don't support Navigation Timing API Level 2 consistently
+      lenis.scrollTo(0, { immediate: true })
+    }
+
     function raf(time: number) {
       lenis.raf(time)
       requestAnimationFrame(raf)
