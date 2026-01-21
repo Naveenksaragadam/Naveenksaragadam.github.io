@@ -3,7 +3,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
+import Typewriter from './Typewriter'
+
 export default function Overlay() {
+    // ... existing hooks ...
     const containerRef = useRef<HTMLDivElement>(null)
 
     const { scrollYProgress } = useScroll({
@@ -11,17 +14,14 @@ export default function Overlay() {
         offset: ["start start", "end end"]
     })
 
+    // ... existing transforms ...
     // Section 1: Title (0% - 20%)
     const opacity1 = useTransform(scrollYProgress, [0, 0.2], [1, 0])
     const y1 = useTransform(scrollYProgress, [0, 0.2], ["0vh", "-50vh"])
 
-    // Section 2: Bio (25% - 65%) - Right Aligned
-    // Rise from bottom (25-35%), Hold longer (35-55%), Exit up (55-65%)
+    // ... existing transforms for other sections ...
     const opacity2 = useTransform(scrollYProgress, [0.25, 0.35, 0.55, 0.65], [0, 1, 1, 0])
     const y2 = useTransform(scrollYProgress, [0.25, 0.35, 0.55, 0.65], ["60vh", "0vh", "0vh", "-60vh"])
-
-    // Section 3: Experience (65% - 95%) - Left Aligned
-    // Rise from bottom (65-75%), Hold (75-85%), Exit up (85-95%)
     const opacity3 = useTransform(scrollYProgress, [0.65, 0.75, 0.85, 0.95], [0, 1, 1, 0])
     const y3 = useTransform(scrollYProgress, [0.65, 0.75, 0.85, 0.95], ["60vh", "0vh", "0vh", "-60vh"])
 
@@ -34,8 +34,13 @@ export default function Overlay() {
                 className="fixed top-0 left-0 h-screen w-full flex items-center justify-center p-8 text-center"
             >
                 <h1 className="text-5xl md:text-9xl font-bold tracking-tighter text-white mix-blend-difference leading-[0.9]">
-                    Naveen <br className="hidden md:block" /> Saragadam.
-                    <span className="bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent text-2xl md:text-4xl mt-6 block tracking-normal font-light">Data Engineer.</span>
+                    Naveen <br className="hidden md:block" /> Saragadam
+                    <span className="block mt-6 text-2xl md:text-4xl tracking-normal font-light">
+                        <Typewriter
+                            words={['Data Engineer', 'Data Analyst', 'Analytics Engineer']}
+                            className="bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent"
+                        />
+                    </span>
                 </h1>
             </motion.div>
 

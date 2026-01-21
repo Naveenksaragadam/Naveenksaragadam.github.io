@@ -12,15 +12,19 @@ const navItems = [
 ]
 
 export default function Navbar() {
-    const [activeTab, setActiveTab] = React.useState('home') // Added state
+    const [activeTab, setActiveTab] = React.useState('home')
+    const [isScrolled, setIsScrolled] = React.useState(false)
 
-    React.useEffect(() => { // Added useEffect
+    // Handle scroll for active tab AND navbar position
+    React.useEffect(() => {
         const handleScroll = () => {
-            // Simple offset-based detection
+            const scrollY = window.scrollY
+            setIsScrolled(scrollY > 100)
+
+            // Active Tab Logic
             const workSection = document.getElementById('work')
             const contactSection = document.getElementById('contact')
-
-            const scrollPosition = window.scrollY + window.innerHeight / 2
+            const scrollPosition = scrollY + window.innerHeight / 2
 
             if (contactSection && scrollPosition >= contactSection.offsetTop) {
                 setActiveTab('contact')
@@ -40,9 +44,12 @@ export default function Navbar() {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="fixed top-8 left-0 right-0 z-40 flex justify-center"
+            className={`fixed top-8 left-0 right-0 z-40 flex pointer-events-none transition-all duration-700 ease-in-out ${isScrolled ? 'justify-center' : 'justify-end pr-24 md:pr-32'}`}
         >
-            <div className="flex items-center gap-1 bg-black/20 backdrop-blur-xl border border-white/10 px-2 py-2 rounded-full shadow-2xl shadow-black/20">
+            <motion.div
+                layout
+                className="flex items-center gap-1 bg-black/20 backdrop-blur-xl border border-white/10 px-2 py-2 rounded-full shadow-2xl shadow-black/20 pointer-events-auto"
+            >
                 {navItems.map((item) => (
                     <Link
                         key={item.name}
@@ -63,7 +70,7 @@ export default function Navbar() {
                         <span className="relative z-10">{item.name}</span>
                     </Link>
                 ))}
-            </div>
+            </motion.div>
         </motion.nav>
     )
 }
