@@ -42,21 +42,21 @@ export default function Navbar() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="fixed top-6 left-0 right-0 z-40 flex justify-center"
         >
-            <div className="flex items-center gap-1 bg-white/10 backdrop-blur-md border border-white/10 px-2 py-2 rounded-full shadow-lg">
-                {navItems.map((item) => ( // Removed index from map
+            <div className="flex items-center gap-1 bg-black/20 backdrop-blur-xl border border-white/10 px-2 py-2 rounded-full shadow-2xl shadow-black/20">
+                {navItems.map((item) => (
                     <Link
                         key={item.name}
                         href={item.href}
-                        onClick={() => setActiveTab(item.id)} // Added onClick
+                        onClick={() => setActiveTab(item.id)}
                         className={`
-                relative px-6 py-2 rounded-full text-sm font-medium transition-colors
-                ${activeTab === item.id ? 'text-white' : 'text-gray-400 hover:text-white'}
+                relative px-6 py-2 rounded-full text-sm font-medium transition-colors duration-300
+                ${activeTab === item.id ? 'text-black' : 'text-white/60 hover:text-white'}
               `}
                     >
-                        {activeTab === item.id && ( // Changed condition
+                        {activeTab === item.id && (
                             <motion.div
                                 layoutId="active-pill"
-                                className="absolute inset-0 bg-white/10 rounded-full"
+                                className="absolute inset-0 bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)]"
                                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                             />
                         )}

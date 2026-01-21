@@ -45,14 +45,30 @@ export default function Projects() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="group relative h-[400px] w-full overflow-hidden rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm transition-all hover:bg-white/10"
+                            className="group relative h-[450px] w-full overflow-hidden rounded-3xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md transition-all duration-500 hover:bg-white/[0.08] hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/10"
                         >
-                            <div className={`absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity ${project.color}`} />
+                            {/* Color Gradient Mesh Background (Subtle) */}
+                            <div className={`absolute -top-20 -right-20 w-64 h-64 rounded-full blur-[100px] opacity-20 group-hover:opacity-40 transition-opacity duration-700 ${project.color.replace('bg-', 'bg-')}`} />
 
-                            <div className="absolute inset-x-0 bottom-0 p-8 transform transition-transform group-hover:-translate-y-2">
-                                <p className="text-sm font-medium text-gray-400 mb-2 uppercase tracking-wider">{project.category}</p>
-                                <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-                                <p className="text-gray-300 line-clamp-2">{project.description}</p>
+                            <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-10">
+                                <div className="space-y-4 transform transition-transform duration-500 group-hover:-translate-y-2">
+                                    <span className="inline-block px-3 py-1 text-xs font-medium tracking-widest text-white/60 uppercase border border-white/10 rounded-full bg-white/5 backdrop-blur-sm">
+                                        {project.category}
+                                    </span>
+                                    <h3 className="text-3xl font-bold text-white tracking-tight leading-tight">
+                                        {project.title}
+                                    </h3>
+                                    <p className="text-white/70 text-lg leading-relaxed line-clamp-3 font-light">
+                                        {project.description}
+                                    </p>
+                                </div>
+
+                                {/* Hover Arrow Indicator */}
+                                <div className="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-4 group-hover:translate-x-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </div>
                             </div>
                         </motion.div>
                     ))}
