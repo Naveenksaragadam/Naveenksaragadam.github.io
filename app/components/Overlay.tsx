@@ -38,7 +38,7 @@ export default function Overlay() {
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                        className="text-6xl md:text-9xl font-bold tracking-tighter text-white/90 leading-[0.85] mb-6 select-none"
+                        className="text-5xl md:text-8xl font-bold tracking-tighter text-white/80 leading-[0.9] mb-6 select-none"
                     >
                         Naveen <br /> Saragadam
                     </motion.h1>
