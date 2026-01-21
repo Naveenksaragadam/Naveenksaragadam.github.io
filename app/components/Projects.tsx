@@ -7,18 +7,21 @@ const projects = [
         title: "Formula 1 Racing Analytics Platform",
         category: "Lakehouse Architecture",
         description: "Production-grade platform processing 70+ years of race data (10M+ records) with sub-second query performance using ClickHouse, Airflow, and MinIO.",
+        techStack: ['Python', 'Airflow', 'ClickHouse', 'dbt', 'MinIO', 'Docker', 'Superset'],
         color: "bg-red-600"
     },
     {
         title: "SQL Data Warehouse",
         category: "Data Modeling",
         description: "Robust warehouse implementation using PostgreSQL with Star Schema for business intelligence.",
+        techStack: ['PostgreSQL', 'SQL', 'Star Schema', 'ETL'],
         color: "bg-blue-600"
     },
     {
         title: "HR Analytics Dashboard",
         category: "Visualization",
         description: "Interactive Tableau dashboard for visualizing key performance indicators and workforce trends.",
+        techStack: ['Tableau', 'SQL', 'Data Viz'],
         color: "bg-yellow-500"
     }
 ]
@@ -45,12 +48,12 @@ export default function Projects() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="group relative h-[450px] w-full overflow-hidden rounded-3xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.08] backdrop-blur-md transition-all duration-500 hover:bg-gray-100 dark:hover:bg-white/[0.08] hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/20"
+                            className="group relative h-[500px] w-full overflow-hidden rounded-3xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.08] backdrop-blur-md transition-all duration-500 hover:bg-gray-100 dark:hover:bg-white/[0.08] hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/20"
                         >
                             {/* Color Gradient Mesh Background (Subtle) */}
                             <div className={`absolute -top-20 -right-20 w-64 h-64 rounded-full blur-[100px] opacity-20 group-hover:opacity-40 transition-opacity duration-700 ${project.color.replace('bg-', 'bg-')}`} />
 
-                            <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-10">
+                            <div className="relative z-10 h-full flex flex-col justify-between p-8 md:p-10">
                                 <div className="space-y-4 transform transition-transform duration-500 group-hover:-translate-y-2">
                                     <span className="inline-block px-3 py-1 text-xs font-medium tracking-widest text-gray-500 dark:text-white/60 uppercase border border-gray-200 dark:border-white/10 rounded-full bg-gray-100 dark:bg-white/5 backdrop-blur-sm">
                                         {project.category}
@@ -61,6 +64,15 @@ export default function Projects() {
                                     <p className="text-gray-600 dark:text-white/70 text-lg leading-relaxed line-clamp-3 font-light">
                                         {project.description}
                                     </p>
+                                </div>
+
+                                {/* Tech Stack Tags */}
+                                <div className="flex flex-wrap gap-2 mt-4 transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100">
+                                    {project.techStack.map((tech, i) => (
+                                        <span key={i} className="text-[10px] px-2 py-1 bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-white/80 rounded-md font-medium">
+                                            {tech}
+                                        </span>
+                                    ))}
                                 </div>
 
                                 {/* Hover Arrow Indicator */}
