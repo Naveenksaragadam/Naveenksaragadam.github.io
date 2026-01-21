@@ -11,16 +11,20 @@ import Logo from "./components/Logo";
 import Footer from "./components/Footer";
 import Noise from "./components/Noise";
 import GlobalMenu from "./components/GlobalMenu";
-import Loader from "./components/Loader";
+import Preloader from "./components/Preloader";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
 
   return (
     <main id="home" className="relative w-full bg-[#121212]">
+      {/* 
+        Preloader handles the initial load animation (Odometer + Curtain Reveal).
+        It signals onComplete when the exit animation finishes.
+      */}
       <AnimatePresence mode="wait">
         {isLoading && (
-          <Loader key="loader" onLoadComplete={() => setIsLoading(false)} />
+          <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
         )}
       </AnimatePresence>
 
@@ -31,10 +35,10 @@ export default function Home() {
       <Navbar />
 
       {/* 
-        ScrollyCanvas triggers the load completion. 
-        It needs to be rendered to start loading. 
+        ScrollyCanvas loads images in background. 
+        We no longer let it control isLoading to enforce the 2s preloader aesthetic.
       */}
-      <ScrollyCanvas onLoaded={() => setTimeout(() => setIsLoading(false), 500)} />
+      <ScrollyCanvas onLoaded={() => { }} />
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -44,8 +48,6 @@ export default function Home() {
         <Overlay />
       </motion.div>
 
-      {/* Projects and Footer don't need to be hidden, they are below fold, 
-          but fading them in with the Overlay feels nicer. */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
