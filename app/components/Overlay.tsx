@@ -35,7 +35,7 @@ export default function Overlay() {
             >
                 <h1 className="text-5xl md:text-9xl font-bold tracking-tighter text-white mix-blend-difference leading-[0.9]">
                     Naveen <br className="hidden md:block" /> Saragadam.
-                    <span className="text-white/60 text-2xl md:text-4xl mt-6 block tracking-normal font-light">Data Engineer.</span>
+                    <span className="bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent text-2xl md:text-4xl mt-6 block tracking-normal font-light">Data Engineer.</span>
                 </h1>
             </motion.div>
 
@@ -46,7 +46,7 @@ export default function Overlay() {
             >
                 <div className="text-right max-w-3xl">
                     <h2 className="text-3xl md:text-7xl font-bold text-white mb-8 leading-[1.05] tracking-tighter">
-                        Modernizing Infrastructure for <br /><span className="text-orange-500">Fortune 100</span> Leaders.
+                        Modernizing Infrastructure for <br /><span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Fortune 100</span> Leaders.
                     </h2>
                     <p className="text-lg md:text-2xl text-white/80 leading-relaxed ml-auto font-light max-w-xl">
                         Driving transformation at <strong className="text-white font-medium">Target</strong> and <strong className="text-white font-medium">General Motors</strong>.
@@ -62,7 +62,7 @@ export default function Overlay() {
             >
                 <div className="max-w-4xl">
                     <h2 className="text-3xl md:text-7xl font-bold text-white mb-8 leading-[1.05] tracking-tighter">
-                        Reduced pipeline runtimes <span className="text-blue-500">30%</span> on <br /> terabyte-scale datasets.
+                        Reduced pipeline runtimes <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">30%</span> on <br /> terabyte-scale datasets.
                     </h2>
                     <p className="text-lg md:text-2xl text-white/80 leading-relaxed max-w-2xl font-light">
                         I migrated <strong className="text-white font-medium">20+ legacy Hadoop/Hive systems</strong> to PySpark, supporting 300+ downstream reports.
