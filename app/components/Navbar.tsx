@@ -45,11 +45,11 @@ export default function Navbar() {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className={`fixed top-8 left-0 right-0 z-40 flex pointer-events-none transition-all duration-700 ease-in-out ${isScrolled ? 'justify-center' : 'justify-end pr-20 md:pr-32'}`}
+            className="fixed top-8 right-32 md:right-40 z-40 flex pointer-events-none"
         >
             <motion.div
                 layout
-                className="flex items-center gap-1 bg-black/20 backdrop-blur-xl border border-white/10 px-2 py-2 rounded-full shadow-2xl shadow-black/20 pointer-events-auto"
+                className="flex items-center gap-1 bg-[#0a0a0a]/60 backdrop-blur-2xl border border-white/5 px-1.5 py-1.5 rounded-full shadow-2xl shadow-black/40 pointer-events-auto"
             >
                 {navItems.map((item) => (
                     <Link
@@ -57,7 +57,7 @@ export default function Navbar() {
                         href={item.href}
                         onClick={() => setActiveTab(item.id)}
                         className={`
-                relative px-6 py-2 rounded-full text-sm font-medium transition-colors duration-300
+                relative px-5 py-2 rounded-full text-sm font-medium transition-colors duration-300
                 ${activeTab === item.id ? 'text-black' : 'text-white/60 hover:text-white'}
               `}
                     >
@@ -73,9 +73,10 @@ export default function Navbar() {
                 ))}
                 {activeTab !== 'home' && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.8, width: 0 }}
+                        animate={{ opacity: 1, scale: 1, width: 'auto' }}
+                        exit={{ opacity: 0, scale: 0.8, width: 0 }}
+                        className="pl-2 border-l border-white/10 ml-2"
                     >
                         <ThemeToggle />
                     </motion.div>

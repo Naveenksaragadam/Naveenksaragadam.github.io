@@ -31,49 +31,47 @@ export default function Overlay() {
             {/* Section 1 - Title */}
             <motion.div
                 style={{ opacity: opacity1, y: y1 }}
-                className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-4"
+                className="fixed top-0 left-0 h-screen w-full flex items-center justify-center p-8 text-center"
             >
-                <div className="relative z-10 text-center">
-                    <h1 className="text-6xl md:text-[11rem] font-bold tracking-tighter text-white mix-blend-difference leading-[0.85] uppercase">
-                        Naveen<br />Saragadam
-                    </h1>
-                    <div className="mt-8 md:mt-12 flex justify-center">
-                        <span className="inline-block bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full text-sm md:text-xl font-medium tracking-widest uppercase text-white/80">
-                            <Typewriter
-                                words={['Data Engineer', 'Analytics', 'Architecture']}
-                                className="text-white"
-                            />
-                        </span>
-                    </div>
-                </div>
+                <h1 className="text-6xl md:text-[10rem] font-bold tracking-tighter text-white leading-[0.85] select-none">
+                    Naveen <br /> Saragadam
+                    <span className="block mt-8 text-xl md:text-3xl tracking-widest font-light text-white/50 uppercase">
+                        <Typewriter
+                            words={['Data Engineer', 'Analytics Engineer', 'Data Analyst']}
+                            className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60"
+                        />
+                    </span>
+                </h1>
             </motion.div>
 
-            {/* Section 2 - Bio (Right Aligned - Editorial Style) */}
+            {/* Section 2 - Bio (Right Aligned) */}
             <motion.div
                 style={{ opacity: opacity2, y: y2 }}
-                className="fixed top-0 left-0 h-screen w-full flex items-center justify-end pr-8 md:pr-32 pointer-events-none"
+                className="fixed top-0 left-0 h-screen w-full flex items-center justify-end pr-6 md:pr-20 pointer-events-none"
             >
-                <div className="text-right max-w-4xl">
-                    <h2 className="text-5xl md:text-8xl font-bold text-white mix-blend-difference mb-8 leading-[0.9] tracking-tighter">
-                        Fortune 100 <br /> Scale.
+                <div className="text-right max-w-3xl">
+                    <h2 className="text-3xl md:text-7xl font-bold text-white mb-8 leading-[1.05] tracking-tighter">
+                        Modernizing Infrastructure for <br /><span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Fortune 100</span> Leaders.
                     </h2>
-                    <p className="text-xl md:text-3xl text-white/90 font-light leading-relaxed max-w-xl ml-auto mix-blend-difference">
-                        Architecting the data backbones for <strong className="font-medium">Target</strong> and <strong className="font-medium">General Motors</strong>.
+                    <p className="text-lg md:text-2xl text-white/80 leading-relaxed ml-auto font-light max-w-xl">
+                        Driving transformation at <strong className="text-white font-medium">Target</strong> and <strong className="text-white font-medium">General Motors</strong>.
+                        I specialize in <strong className="text-white font-medium">Scalable Data Pipelines</strong> and <strong className="text-white font-medium">Lakehouse Architectures</strong> that empower critical business decisions.
                     </p>
                 </div>
             </motion.div>
 
-            {/* Section 3 - Experience (Left Aligned - Editorial Style) */}
+            {/* Section 3 - Experience (Left Aligned) */}
             <motion.div
                 style={{ opacity: opacity3, y: y3 }}
-                className="fixed top-0 left-0 h-screen w-full flex items-center justify-start pl-8 md:pl-32 pointer-events-none"
+                className="fixed top-0 left-0 h-screen w-full flex items-center justify-start pl-6 md:pl-20 pointer-events-none"
             >
                 <div className="max-w-4xl">
-                    <h2 className="text-5xl md:text-8xl font-bold text-white mix-blend-difference mb-8 leading-[0.9] tracking-tighter">
-                        Velocity <br /> & Volume.
+                    <h2 className="text-3xl md:text-7xl font-bold text-white mb-8 leading-[1.05] tracking-tighter">
+                        Reduced pipeline runtimes <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">30%</span> on <br /> terabyte-scale datasets.
                     </h2>
-                    <p className="text-xl md:text-3xl text-white/90 font-light leading-relaxed max-w-xl mix-blend-difference">
-                        Migrating <strong className="font-medium">terabyte-scale</strong> legacy systems to modern lakehouses, reducing runtime by <strong className="font-medium">30%</strong>.
+                    <p className="text-lg md:text-2xl text-white/80 leading-relaxed max-w-2xl font-light">
+                        I migrated <strong className="text-white font-medium">20+ legacy Hadoop/Hive systems</strong> to PySpark, supporting 300+ downstream reports.
+                        My robust data quality frameworks ensure <strong className="text-white font-medium">99.9% SLA reliability</strong> for critical pricing decisions.
                     </p>
                 </div>
             </motion.div>
