@@ -66,15 +66,13 @@ export default function ScrollyCanvas() {
             const img = images[index]
 
             if (img) {
-                // Calculate ratio with an 8% zoom to crop edges (watermark)
+                // Object-fit: cover logic
                 const hRatio = canvas.width / img.width
                 const vRatio = canvas.height / img.height
-                const ratio = Math.max(hRatio, vRatio) * 1.08
+                const ratio = Math.max(hRatio, vRatio)
 
                 const centerShift_x = (canvas.width - img.width * ratio) / 2
-                // Shift y down by 5% of screen height to keep Face (top-center) in view 
-                // while pushing Bottom-Right (watermark) further off-screen.
-                const centerShift_y = ((canvas.height - img.height * ratio) / 2) + (canvas.height * 0.05)
+                const centerShift_y = (canvas.height - img.height * ratio) / 2
 
                 ctx.clearRect(0, 0, canvas.width, canvas.height)
                 ctx.drawImage(
@@ -90,13 +88,33 @@ export default function ScrollyCanvas() {
                 )
             }
         }
-        // ...
-        // ...
-        return (
-            <div className="h-[500vh] w-full relative">
-                <div className="sticky top-0 h-screen w-full overflow-hidden">
-                    <canvas ref={canvasRef} className="block w-full h-full" />
-                </div>
+
+        // Set canvas size to match window
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+            renderFrame(scrollYProgress.get()) // Initial render
+        }
+
+        window.addEventListener('resize', resizeCanvas)
+        resizeCanvas()
+
+        // Subscribe to scroll changes
+        const unsubscribe = scrollYProgress.on('change', (latest) => {
+            requestAnimationFrame(() => renderFrame(latest))
+        })
+
+        return () => {
+            window.removeEventListener('resize', resizeCanvas)
+            unsubscribe()
+        }
+    }, [isLoaded, scrollYProgress, images])
+
+    return (
+        <div className="h-[500vh] w-full relative">
+            <div className="sticky top-0 h-screen w-full overflow-hidden">
+                <canvas ref={canvasRef} className="block w-full h-full scale-[1.05]" />
             </div>
-        )
-    }
+        </div>
+    )
+}
