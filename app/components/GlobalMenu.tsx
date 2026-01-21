@@ -1,85 +1,200 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import {
+    Home,
+    Briefcase,
+    Mail,
+    Linkedin,
+    Github,
+    Twitter,
+    Search,
+    Command,
+    X,
+    ArrowRight
+} from 'lucide-react'
 
 const menuItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about-placeholder' },
-    { name: 'Services', href: '#services-placeholder' },
-    { name: 'Journal', href: '#journal-placeholder' },
-    { name: 'Contact', href: '#contact' },
+    {
+        category: "Pages",
+        items: [
+            { name: 'Home', href: '#home', icon: Home, description: 'Go to homepage' },
+            { name: 'Projects', href: '#work', icon: Briefcase, description: 'View my selected work' },
+            { name: 'Contact', href: '#contact', icon: Mail, description: 'Get in touch' },
+        ]
+    },
+    {
+        category: "Connect",
+        items: [
+            { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin, description: 'Professional network', external: true },
+            { name: 'GitHub', href: 'https://github.com', icon: Github, description: 'Code repositories', external: true },
+            { name: 'Twitter', href: 'https://twitter.com', icon: Twitter, description: 'Thoughts & updates', external: true },
+        ]
+    }
 ]
 
 export default function GlobalMenu() {
     const [isOpen, setIsOpen] = useState(false)
+    const [query, setQuery] = useState('')
+
+    // Keyboard Shortcuts
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault()
+                setIsOpen(prev => !prev)
+            }
+            if (e.key === 'Escape') {
+                setIsOpen(false)
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [])
+
+    // Lock body scroll when open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'unset'
+        }
+    }, [isOpen])
+
+    // Filter Items
+    const filteredGroups = menuItems.map(group => ({
+        ...group,
+        items: group.items.filter(item =>
+            item.name.toLowerCase().includes(query.toLowerCase()) ||
+            item.description.toLowerCase().includes(query.toLowerCase())
+        )
+    })).filter(group => group.items.length > 0)
 
     return (
         <>
+            {/* Trigger Button */}
             <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                onClick={() => setIsOpen(!isOpen)}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                onClick={() => setIsOpen(true)}
                 className="fixed top-8 right-8 z-[60] w-12 h-12 md:w-20 md:h-20 flex items-center justify-center mix-blend-difference group"
+                aria-label="Open Menu"
             >
-                <div className="relative w-8 h-6 md:w-10 md:h-8 flex flex-col justify-between">
-                    <span className={`w-full h-[2px] bg-white transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-[11px]' : ''}`} />
-                    <span className={`w-full h-[2px] bg-white transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
-                    <span className={`w-full h-[2px] bg-white transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-[11px]' : ''}`} />
+                <div className="relative w-10 h-10 md:w-14 md:h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-all duration-300">
+                    <Command className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
             </motion.button>
 
-            {/* Turn off standard Navbar when Menu is open? Optional. Keeping both for now. */}
-
-            {/* Menu Overlay */}
+            {/* Modal Overlay */}
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="fixed inset-0 z-50 bg-[#121212]/95 backdrop-blur-2xl flex items-center justify-center"
-                    >
-                        {/* Background Decoration */}
-                        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[150px]" />
-                            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[150px]" />
-                        </div>
-
-                        <nav className="relative z-10 flex flex-col items-center gap-8">
-                            {menuItems.map((item, index) => (
-                                <motion.div
-                                    key={item.name}
-                                    initial={{ y: 50, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    exit={{ y: 20, opacity: 0 }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                >
-                                    <Link
-                                        href={item.href}
-                                        onClick={() => setIsOpen(false)}
-                                        className="text-5xl md:text-7xl font-bold text-white hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-orange-400 hover:to-red-500 transition-all tracking-tighter"
-                                    >
-                                        {item.name}
-                                    </Link>
-                                </motion.div>
-                            ))}
-                        </nav>
-
-                        {/* Social/Meta Info Bottom Left */}
+                    <div className="fixed inset-0 z-[70] flex items-start justify-center pt-[15vh] px-4">
+                        {/* Backdrop */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="absolute bottom-12 left-12 text-gray-500 text-sm uppercase tracking-widest hidden md:block"
+                            onClick={() => setIsOpen(false)}
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        />
+
+                        {/* Modal */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                            transition={{ duration: 0.2 }}
+                            className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]"
                         >
-                            Naveen Saragadam <br /> Portfolio '24
+                            {/* Header / Search */}
+                            <div className="flex items-center px-4 py-4 border-b border-white/10 shrink-0">
+                                <Search className="w-5 h-5 text-white/40 mr-3" />
+                                <input
+                                    autoFocus
+                                    type="text"
+                                    placeholder="Type a command or search..."
+                                    value={query}
+                                    onChange={(e) => setQuery(e.target.value)}
+                                    className="flex-1 bg-transparent text-lg text-white placeholder-white/20 outline-none"
+                                />
+                                <div className="flex items-center gap-2">
+                                    <span className="hidden md:flex items-center gap-1 px-2 py-1 rounded bg-white/5 border border-white/10 text-xs text-white/40 font-mono">
+                                        <span className="text-[10px]">ESC</span>
+                                    </span>
+                                    <button
+                                        onClick={() => setIsOpen(false)}
+                                        className="p-1 hover:bg-white/10 rounded-md transition-colors"
+                                    >
+                                        <X className="w-5 h-5 text-white/40" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="overflow-y-auto p-2 scrollbar-hide">
+                                {filteredGroups.length === 0 ? (
+                                    <div className="py-12 text-center text-white/30 text-sm">
+                                        No results found.
+                                    </div>
+                                ) : (
+                                    <div className="space-y-6 p-2">
+                                        {filteredGroups.map((group) => (
+                                            <div key={group.category}>
+                                                <h3 className="px-3 text-xs font-semibold text-white/30 uppercase tracking-wider mb-2">
+                                                    {group.category}
+                                                </h3>
+                                                <div className="space-y-1">
+                                                    {group.items.map((item) => (
+                                                        <Link
+                                                            key={item.name}
+                                                            href={item.href}
+                                                            target={item.external ? "_blank" : undefined}
+                                                            rel={item.external ? "noopener noreferrer" : undefined}
+                                                            onClick={() => setIsOpen(false)}
+                                                            className="group flex items-center justify-between px-3 py-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer"
+                                                        >
+                                                            <div className="flex items-center gap-4">
+                                                                <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/60 group-hover:text-orange-400 group-hover:border-orange-500/30 transition-colors">
+                                                                    <item.icon className="w-5 h-5" />
+                                                                </div>
+                                                                <div>
+                                                                    <div className="text-white font-medium group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-red-500 transition-all">
+                                                                        {item.name}
+                                                                    </div>
+                                                                    <div className="text-white/40 text-sm">
+                                                                        {item.description}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {item.external && (
+                                                                <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                                            )}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Footer */}
+                            <div className="px-4 py-3 bg-white/5 border-t border-white/10 flex items-center justify-between text-[10px] text-white/30 uppercase tracking-wider shrink-0">
+                                <div>Navigation</div>
+                                <div className="flex items-center gap-4">
+                                    <span className="flex items-center gap-1">
+                                        <ArrowRight className="w-3 h-3" /> Select
+                                    </span>
+                                    <span className="flex items-center gap-1">
+                                        <Command className="w-3 h-3" /> + K to open
+                                    </span>
+                                </div>
+                            </div>
                         </motion.div>
-                    </motion.div>
+                    </div>
                 )}
             </AnimatePresence>
         </>
