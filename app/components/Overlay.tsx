@@ -31,17 +31,19 @@ export default function Overlay() {
             {/* Section 1 - Title */}
             <motion.div
                 style={{ opacity: opacity1, y: y1 }}
-                className="fixed top-0 left-0 h-screen w-full flex items-center justify-center p-8 text-center"
+                className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-8 text-center"
             >
-                <h1 className="text-6xl md:text-[10rem] font-bold tracking-tighter text-white leading-[0.85] select-none">
-                    Naveen <br /> Saragadam
-                    <span className="block mt-8 text-xl md:text-3xl tracking-widest font-light text-white/50 uppercase">
-                        <Typewriter
-                            words={['Data Engineer', 'Analytics Engineer', 'Data Analyst']}
-                            className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60"
-                        />
-                    </span>
+                <h1 className="text-5xl md:text-8xl font-semibold tracking-tight text-white mb-6 leading-tight select-none">
+                    Naveen Saragadam
                 </h1>
+
+                <div className="text-base md:text-xl font-medium uppercase tracking-[0.2em] text-white/60">
+                    <span className="mr-3 text-blue-500">_</span>
+                    <Typewriter
+                        words={['Data Engineer', 'Analytics Engineer', 'Data Analyst']}
+                        className=""
+                    />
+                </div>
             </motion.div>
 
             {/* Section 2 - Bio (Right Aligned) */}
