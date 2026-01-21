@@ -16,7 +16,15 @@ import {
     ArrowRight
 } from 'lucide-react'
 
-const menuItems = [
+interface MenuItem {
+    name: string
+    href: string
+    icon: any
+    description: string
+    external?: boolean
+}
+
+const menuItems: { category: string; items: MenuItem[] }[] = [
     {
         category: "Pages",
         items: [
