@@ -1,15 +1,14 @@
 'use client'
 
-import React from 'react' // Added React import
+import React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import ThemeToggle from './ThemeToggle'
 
 const navItems = [
-    { name: 'Home', href: '#home', id: 'home' }, // Added id
-    { name: 'Work', href: '#work', id: 'work' }, // Added id
-    // { name: 'About', href: '#about' }, // Overlay text essentially covers About
-    { name: 'Contact', href: '#contact', id: 'contact' }, // Added id
+    { name: 'Home', href: '#home', id: 'home' },
+    { name: 'Work', href: '#work', id: 'work' },
+    { name: 'Contact', href: '#contact', id: 'contact' },
 ]
 
 export default function Navbar() {
@@ -42,17 +41,15 @@ export default function Navbar() {
 
     return (
         <motion.nav
-            className={`fixed z-40 flex pointer-events-none transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${isScrolled
-                    ? 'top-6 left-1/2 -translate-x-1/2'
-                    : 'top-8 right-20 md:right-40'
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className={`fixed top-8 left-0 right-0 z-40 flex pointer-events-none transition-all duration-700 ease-in-out ${isScrolled ? 'justify-center' : 'justify-end pr-20 md:pr-40'
                 }`}
         >
             <motion.div
                 layout
-                className={`flex items-center gap-1 backdrop-blur-2xl border transition-all duration-300 pointer-events-auto ${isScrolled
-                        ? 'bg-black/80 border-white/10 px-3 py-2 rounded-full shadow-2xl scale-90'
-                        : 'bg-[#0a0a0a]/60 border-white/5 px-1.5 py-1.5 rounded-full shadow-xl'
-                    }`}
+                className="flex items-center gap-1 bg-[#0a0a0a]/60 backdrop-blur-2xl border border-white/5 px-1.5 py-1.5 rounded-full shadow-2xl shadow-black/40 pointer-events-auto"
             >
                 {navItems.map((item) => (
                     <Link

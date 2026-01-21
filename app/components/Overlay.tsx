@@ -33,16 +33,26 @@ export default function Overlay() {
                 style={{ opacity: opacity1, y: y1 }}
                 className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-8 text-center"
             >
-                <h1 className="text-5xl md:text-8xl font-semibold tracking-tight text-white mb-6 leading-tight select-none">
-                    Naveen Saragadam
-                </h1>
+                {/* 
+                  TYPOGRAPHY OVERHAUL
+                  - Scale: Massive (text-7xl -> 11rem)
+                  - Tracking: Tighter (tight -> tighter)
+                  - Leading: Compressed (leading-tight -> leading-[0.8])
+                  - Weight: Bold but refined.
+                */}
+                <div className="relative z-10 mix-blend-difference">
+                    <h1 className="text-7xl md:text-[11rem] font-bold tracking-tighter text-white leading-[0.8] mb-8 select-none">
+                        Naveen <br /> Saragadam
+                    </h1>
+                </div>
 
-                <div className="text-base md:text-xl font-medium uppercase tracking-[0.2em] text-white/60">
-                    <span className="mr-3 text-blue-500">_</span>
+                <div className="relative z-10 flex items-center gap-3 md:gap-4 text-sm md:text-xl font-medium tracking-widest uppercase text-white/50">
+                    <span className="w-8 md:w-12 h-[1px] bg-white/30" />
                     <Typewriter
                         words={['Data Engineer', 'Analytics Engineer', 'Data Analyst']}
-                        className=""
+                        className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/50"
                     />
+                    <span className="w-8 md:w-12 h-[1px] bg-white/30" />
                 </div>
             </motion.div>
 
