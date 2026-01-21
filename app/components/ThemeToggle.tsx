@@ -16,14 +16,12 @@ export default function ThemeToggle() {
     if (!mounted) return null
 
     return (
-        <div className="flex items-center gap-2 pl-4 ml-4 border-l border-white/20">
-            <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-1.5 rounded-full text-white/50 hover:text-white transition-colors"
-                aria-label="Toggle Theme"
-            >
-                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-        </div>
+        <button
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="p-2 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Toggle Theme"
+        >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
     )
 }
