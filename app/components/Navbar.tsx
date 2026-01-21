@@ -3,6 +3,7 @@
 import React from 'react' // Added React import
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import ThemeToggle from './ThemeToggle'
 
 const navItems = [
     { name: 'Home', href: '#home', id: 'home' }, // Added id
@@ -70,6 +71,15 @@ export default function Navbar() {
                         <span className="relative z-10">{item.name}</span>
                     </Link>
                 ))}
+                {activeTab !== 'home' && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                    >
+                        <ThemeToggle />
+                    </motion.div>
+                )}
             </motion.div>
         </motion.nav>
     )

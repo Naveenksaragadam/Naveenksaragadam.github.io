@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
-
+import { Providers } from "./components/Providers";
 import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SmoothScroll>{children}</SmoothScroll>
+        <Providers>
+          <SmoothScroll>{children}</SmoothScroll>
+        </Providers>
         <Analytics />
       </body>
     </html>
