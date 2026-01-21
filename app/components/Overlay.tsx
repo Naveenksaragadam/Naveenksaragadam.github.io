@@ -18,6 +18,32 @@ const MaskedText = ({ children, delay = 0, className = "" }: { children: React.R
     )
 }
 
+const ScrollIndicator = ({ opacity }: { opacity: any }) => {
+    return (
+        <motion.div
+            style={{ opacity }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 3 }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        >
+            <div className="w-[22px] h-[36px] rounded-full border-[2.5px] border-white flex justify-center p-1.5">
+                <motion.div
+                    animate={{
+                        y: [0, 12, 0],
+                    }}
+                    transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                    className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                />
+            </div>
+        </motion.div>
+    )
+}
+
 export default function Overlay() {
     // ... existing hooks ...
     const containerRef = useRef<HTMLDivElement>(null)
@@ -41,13 +67,13 @@ export default function Overlay() {
             {/* Section 1 - Title */}
             <motion.div
                 style={{ opacity: opacity1, y: y1 }}
-                className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-8 text-center pt-[12vh]"
+                className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-8 text-center pt-[15vh]"
             >
                 <div className="relative z-10 flex flex-col items-center gap-0">
                     {/* Gradient text reflecting ambient lighting */}
                     <MaskedText delay={2} className="">
                         <h1
-                            className="text-[3.875rem] md:text-[6.125rem] lg:text-[8.125rem] font-medium tracking-tight leading-[0.95] mb-1 select-none"
+                            className="text-[3.4875rem] md:text-[5.5125rem] lg:text-[7.3125rem] font-medium tracking-tight leading-[0.95] mb-0 select-none"
                             style={{
                                 background: 'linear-gradient(135deg, rgba(147, 197, 253, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.85) 60%, rgba(251, 191, 136, 0.95) 100%)',
                                 WebkitBackgroundClip: 'text',
@@ -58,7 +84,7 @@ export default function Overlay() {
                             Naveen
                         </h1>
                         <h1
-                            className="text-[3.875rem] md:text-[6.125rem] lg:text-[8.125rem] font-medium tracking-tight leading-[1.2] -mt-2 select-none"
+                            className="text-[3.4875rem] md:text-[5.5125rem] lg:text-[7.3125rem] font-medium tracking-tight leading-[1.2] -mt-3 select-none"
                             style={{
                                 background: 'linear-gradient(135deg, rgba(147, 197, 253, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.85) 60%, rgba(251, 191, 136, 0.95) 100%)',
                                 WebkitBackgroundClip: 'text',
@@ -86,6 +112,7 @@ export default function Overlay() {
                         />
                     </div>
                 </motion.div>
+                <ScrollIndicator opacity={opacity1} />
             </motion.div>
 
             {/* Section 2 - Bio (Right Aligned) */}
