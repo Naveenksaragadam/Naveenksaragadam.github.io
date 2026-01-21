@@ -4,28 +4,28 @@ import { motion } from 'framer-motion'
 
 const projects = [
     {
-        title: "Project Alpha",
-        category: "Web Development",
-        description: "A high-performance e-commerce platform built with Next.js.",
-        color: "bg-blue-500"
+        title: "Formula 1 Racing Analytics Platform",
+        category: "Lakehouse Architecture",
+        description: "Production-grade platform processing 70+ years of race data (10M+ records) with sub-second query performance using ClickHouse, Airflow, and MinIO.",
+        color: "bg-red-600"
     },
     {
-        title: "Neon Nexus",
-        category: "Interaction Design",
-        description: "Experimental WebGL showcase focusing on light physics.",
-        color: "bg-purple-500"
+        title: "SQL Data Warehouse",
+        category: "Data Modeling",
+        description: "Robust warehouse implementation using PostgreSQL with Star Schema for business intelligence.",
+        color: "bg-blue-600"
     },
     {
-        title: "Velvet UI",
-        category: "Design System",
-        description: "A comprehensive React component library for enterprise apps.",
-        color: "bg-pink-500"
+        title: "HR Analytics Dashboard",
+        category: "Visualization",
+        description: "Interactive Tableau dashboard for visualizing key performance indicators and workforce trends.",
+        color: "bg-yellow-500"
     }
 ]
 
 export default function Projects() {
     return (
-        <section className="relative z-10 w-full bg-[#121212] py-32 px-4 md:px-12">
+        <section id="work" className="relative z-10 w-full bg-[#121212] py-32 px-4 md:px-12">
             <div className="max-w-7xl mx-auto">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
