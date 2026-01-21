@@ -17,15 +17,14 @@ export default function GlobalMenu() {
 
     return (
         <>
-            {/* Menu Trigger Button */}
             <motion.button
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed top-8 right-8 z-[60] w-12 h-12 flex items-center justify-center mix-blend-difference group"
+                className="fixed top-8 right-8 z-[60] w-12 h-12 md:w-20 md:h-20 flex items-center justify-center mix-blend-difference group"
             >
-                <div className="relative w-8 h-6 flex flex-col justify-between">
+                <div className="relative w-8 h-6 md:w-10 md:h-8 flex flex-col justify-between">
                     <span className={`w-full h-[2px] bg-white transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-[11px]' : ''}`} />
                     <span className={`w-full h-[2px] bg-white transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
                     <span className={`w-full h-[2px] bg-white transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-[11px]' : ''}`} />

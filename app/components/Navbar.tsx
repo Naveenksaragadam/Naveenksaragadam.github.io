@@ -40,7 +40,7 @@ export default function Navbar() {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="fixed top-6 left-0 right-0 z-40 flex justify-center"
+            className="fixed top-8 left-0 right-0 z-40 flex justify-center"
         >
             <div className="flex items-center gap-1 bg-black/20 backdrop-blur-xl border border-white/10 px-2 py-2 rounded-full shadow-2xl shadow-black/20">
                 {navItems.map((item) => (
