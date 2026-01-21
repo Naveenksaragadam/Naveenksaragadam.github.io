@@ -3,7 +3,7 @@
 import { useScroll } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
-export default function ScrollyCanvas() {
+export default function ScrollyCanvas({ onLoaded }: { onLoaded?: () => void }) {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [images, setImages] = useState<HTMLImageElement[]>([])
     const [isLoaded, setIsLoaded] = useState(false)
@@ -41,6 +41,7 @@ export default function ScrollyCanvas() {
                 loadedCount++
                 if (loadedCount === frameCount) {
                     setIsLoaded(true)
+                    onLoaded?.()
                 }
             }
             loadedImages.push(img)
