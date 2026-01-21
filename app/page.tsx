@@ -40,18 +40,12 @@ export default function Home() {
       */}
       <ScrollyCanvas onLoaded={() => { }} />
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-      >
-        <Overlay />
-      </motion.div>
+      <Overlay />
 
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 1, delay: 0.2 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
       >
         <Projects />
         <Footer />

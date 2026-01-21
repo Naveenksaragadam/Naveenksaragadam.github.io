@@ -7,15 +7,14 @@ import Typewriter from './Typewriter'
 
 const MaskedText = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => {
     return (
-        <div className={`overflow-hidden ${className}`}>
-            <motion.div
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1, delay, ease: [0.76, 0, 0.24, 1] }}
-            >
-                {children}
-            </motion.div>
-        </div>
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay, ease: [0.22, 1, 0.36, 1] }}
+            className={className}
+        >
+            {children}
+        </motion.div>
     )
 }
 
@@ -42,47 +41,66 @@ export default function Overlay() {
             {/* Section 1 - Title */}
             <motion.div
                 style={{ opacity: opacity1, y: y1 }}
-                className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-8 text-center"
+                className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-8 text-center pt-[12vh]"
             >
-                <div className="relative z-10 mix-blend-difference flex flex-col items-center">
-                    <MaskedText delay={2} className="mb-2">
-                        <h1 className="text-5xl md:text-8xl font-bold tracking-tighter text-white/90 leading-[0.9] select-none">
+                <div className="relative z-10 flex flex-col items-center gap-0">
+                    {/* Gradient text reflecting ambient lighting */}
+                    <MaskedText delay={2} className="">
+                        <h1
+                            className="text-[3.875rem] md:text-[6.125rem] lg:text-[8.125rem] font-medium tracking-tight leading-[0.95] mb-1 select-none"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(147, 197, 253, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.85) 60%, rgba(251, 191, 136, 0.95) 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                            }}
+                        >
                             Naveen
                         </h1>
-                    </MaskedText>
-                    <MaskedText delay={2.1} className="mb-6">
-                        <h1 className="text-5xl md:text-8xl font-bold tracking-tighter text-white/90 leading-[0.9] select-none">
+                        <h1
+                            className="text-[3.875rem] md:text-[6.125rem] lg:text-[8.125rem] font-medium tracking-tight leading-[1.2] -mt-2 select-none"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(147, 197, 253, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.85) 60%, rgba(251, 191, 136, 0.95) 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                            }}
+                        >
                             Saragadam
                         </h1>
                     </MaskedText>
                 </div>
 
+                {/* Job Title with glassmorphism background */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 2.5 }}
-                    className="relative z-10 flex items-center justify-center text-sm md:text-xl font-medium tracking-[0.2em] uppercase text-white/60"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.2, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative z-10 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-md border border-white/10 mt-8"
                 >
-                    <span className="mr-3 text-blue-500 font-bold">_</span>
-                    <Typewriter
-                        words={['Data Engineer', 'Analytics Engineer', 'Data Analyst']}
-                        className=""
-                    />
+                    <div className="flex items-center justify-center text-sm md:text-base font-light tracking-[0.2em] uppercase text-white/90">
+                        <span className="mr-3 text-blue-400">—</span>
+                        <Typewriter
+                            words={['Data Engineer', 'Analytics Engineer', 'Data Analyst']}
+                            className=""
+                        />
+                    </div>
                 </motion.div>
             </motion.div>
 
             {/* Section 2 - Bio (Right Aligned) */}
             <motion.div
                 style={{ opacity: opacity2, y: y2 }}
-                className="fixed top-0 left-0 h-screen w-full flex items-center justify-end pr-6 md:pr-20 pointer-events-none"
+                className="fixed top-0 left-0 h-screen w-full flex items-center justify-end pr-6 md:pr-16 pointer-events-none"
             >
                 <div className="text-right max-w-3xl">
-                    <h2 className="text-3xl md:text-7xl font-bold text-white mb-8 leading-[1.05] tracking-tighter">
-                        Modernizing Infrastructure for <br /><span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Fortune 100</span> Leaders.
+                    <h2 className="text-2xl md:text-5xl lg:text-6xl font-light text-white/90 mb-6 leading-[1.1] tracking-tight">
+                        Modernizing Infrastructure for <br />
+                        <span className="bg-gradient-to-r from-orange-300 via-orange-400 to-red-400 bg-clip-text text-transparent font-normal">Fortune 100</span> Leaders.
                     </h2>
-                    <p className="text-lg md:text-2xl text-white/80 leading-relaxed ml-auto font-light max-w-xl">
-                        Driving transformation at <strong className="text-white font-medium">Target</strong> and <strong className="text-white font-medium">General Motors</strong>.
-                        I specialize in <strong className="text-white font-medium">Scalable Data Pipelines</strong> and <strong className="text-white font-medium">Lakehouse Architectures</strong> that empower critical business decisions.
+                    <p className="text-base md:text-lg text-white/70 leading-relaxed font-light max-w-lg ml-auto">
+                        Driving transformation at <span className="text-white/85">Target</span> and <span className="text-white/85">General Motors</span>.
+                        I specialize in <span className="text-white/85">Scalable Data Pipelines</span> and <span className="text-white/85">Lakehouse Architectures</span>.
                     </p>
                 </div>
             </motion.div>
@@ -90,15 +108,15 @@ export default function Overlay() {
             {/* Section 3 - Experience (Left Aligned) */}
             <motion.div
                 style={{ opacity: opacity3, y: y3 }}
-                className="fixed top-0 left-0 h-screen w-full flex items-center justify-start pl-6 md:pl-20 pointer-events-none"
+                className="fixed top-0 left-0 h-screen w-full flex items-center justify-start pl-6 md:pl-16 pointer-events-none"
             >
-                <div className="max-w-4xl">
-                    <h2 className="text-3xl md:text-7xl font-bold text-white mb-8 leading-[1.05] tracking-tighter">
-                        Reduced pipeline runtimes <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">30%</span> on <br /> terabyte-scale datasets.
+                <div className="max-w-3xl">
+                    <h2 className="text-2xl md:text-5xl lg:text-6xl font-light text-white/90 mb-6 leading-[1.1] tracking-tight">
+                        Reduced pipeline runtimes <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent font-normal">30%</span> on <br /> terabyte-scale datasets.
                     </h2>
-                    <p className="text-lg md:text-2xl text-white/80 leading-relaxed max-w-2xl font-light">
-                        I migrated <strong className="text-white font-medium">20+ legacy Hadoop/Hive systems</strong> to PySpark, supporting 300+ downstream reports.
-                        My robust data quality frameworks ensure <strong className="text-white font-medium">99.9% SLA reliability</strong> for critical pricing decisions.
+                    <p className="text-base md:text-lg text-white/70 leading-relaxed font-light max-w-2xl">
+                        I migrated <span className="text-white/85">20+ legacy Hadoop/Hive systems</span> to PySpark, supporting 300+ downstream reports.
+                        My robust data quality frameworks ensure <span className="text-white/85">99.9% SLA reliability</span>.
                     </p>
                 </div>
             </motion.div>

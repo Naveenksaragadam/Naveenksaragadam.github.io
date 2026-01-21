@@ -52,7 +52,7 @@ export default function Navbar() {
 
                 <motion.div
                     layout
-                    className="relative flex items-center gap-1 bg-[#121212]/50 backdrop-blur-2xl border border-white/[0.08] p-1.5 rounded-full shadow-2xl shadow-black/50 pointer-events-auto overflow-hidden ring-1 ring-white/5"
+                    className="relative flex items-center gap-1.5 bg-[#121212]/50 backdrop-blur-2xl border border-white/[0.08] p-2 rounded-full shadow-2xl shadow-black/50 pointer-events-auto overflow-hidden ring-1 ring-white/5"
                 >
                     {navItems.map((item) => (
                         <Link
@@ -60,7 +60,7 @@ export default function Navbar() {
                             href={item.href}
                             onClick={() => setActiveTab(item.id)}
                             className={`
-                                relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300
+                                relative px-6 py-2.5 rounded-full text-base font-medium transition-all duration-300
                                 ${activeTab === item.id
                                     ? 'text-white shadow-[0_1px_10px_rgba(255,255,255,0.05)]'
                                     : 'text-white/60 hover:text-white hover:bg-white/5'}
