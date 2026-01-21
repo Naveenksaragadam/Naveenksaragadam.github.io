@@ -33,27 +33,29 @@ export default function Overlay() {
                 style={{ opacity: opacity1, y: y1 }}
                 className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-8 text-center"
             >
-                {/* 
-                  TYPOGRAPHY OVERHAUL
-                  - Scale: Massive (text-7xl -> 11rem)
-                  - Tracking: Tighter (tight -> tighter)
-                  - Leading: Compressed (leading-tight -> leading-[0.8])
-                  - Weight: Bold but refined.
-                */}
                 <div className="relative z-10 mix-blend-difference">
-                    <h1 className="text-7xl md:text-[11rem] font-bold tracking-tighter text-white leading-[0.8] mb-8 select-none">
+                    <motion.h1
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                        className="text-6xl md:text-9xl font-bold tracking-tighter text-white/90 leading-[0.85] mb-6 select-none"
+                    >
                         Naveen <br /> Saragadam
-                    </h1>
+                    </motion.h1>
                 </div>
 
-                <div className="relative z-10 flex items-center gap-3 md:gap-4 text-sm md:text-xl font-medium tracking-widest uppercase text-white/50">
-                    <span className="w-8 md:w-12 h-[1px] bg-white/30" />
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 1 }}
+                    className="relative z-10 flex items-center justify-center text-sm md:text-xl font-medium tracking-[0.2em] uppercase text-white/60"
+                >
+                    <span className="mr-3 text-blue-500 font-bold">_</span>
                     <Typewriter
                         words={['Data Engineer', 'Analytics Engineer', 'Data Analyst']}
-                        className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/50"
+                        className=""
                     />
-                    <span className="w-8 md:w-12 h-[1px] bg-white/30" />
-                </div>
+                </motion.div>
             </motion.div>
 
             {/* Section 2 - Bio (Right Aligned) */}
