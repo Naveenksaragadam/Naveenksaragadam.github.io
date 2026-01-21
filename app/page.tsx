@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Logo from "./components/Logo";
 import Footer from "./components/Footer";
 import Noise from "./components/Noise";
+import GlobalMenu from "./components/GlobalMenu";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Noise />
       <ScrollProgress />
       <Logo />
+      <GlobalMenu />
       <Navbar />
       <ScrollyCanvas />
       <Overlay />
