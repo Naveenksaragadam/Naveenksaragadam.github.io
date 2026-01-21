@@ -5,6 +5,20 @@ import { useRef } from 'react'
 
 import Typewriter from './Typewriter'
 
+const MaskedText = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => {
+    return (
+        <div className={`overflow-hidden ${className}`}>
+            <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay, ease: [0.76, 0, 0.24, 1] }}
+            >
+                {children}
+            </motion.div>
+        </div>
+    )
+}
+
 export default function Overlay() {
     // ... existing hooks ...
     const containerRef = useRef<HTMLDivElement>(null)
@@ -14,12 +28,9 @@ export default function Overlay() {
         offset: ["start start", "end end"]
     })
 
-    // ... existing transforms ...
-    // Section 1: Title (0% - 20%)
     const opacity1 = useTransform(scrollYProgress, [0, 0.2], [1, 0])
     const y1 = useTransform(scrollYProgress, [0, 0.2], ["0vh", "-50vh"])
 
-    // ... existing transforms for other sections ...
     const opacity2 = useTransform(scrollYProgress, [0.25, 0.35, 0.55, 0.65], [0, 1, 1, 0])
     const y2 = useTransform(scrollYProgress, [0.25, 0.35, 0.55, 0.65], ["60vh", "0vh", "0vh", "-60vh"])
     const opacity3 = useTransform(scrollYProgress, [0.65, 0.75, 0.85, 0.95], [0, 1, 1, 0])
@@ -33,21 +44,23 @@ export default function Overlay() {
                 style={{ opacity: opacity1, y: y1 }}
                 className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-8 text-center"
             >
-                <div className="relative z-10 mix-blend-difference">
-                    <motion.h1
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                        className="text-5xl md:text-8xl font-bold tracking-tighter text-white/80 leading-[0.9] mb-6 select-none"
-                    >
-                        Naveen <br /> Saragadam
-                    </motion.h1>
+                <div className="relative z-10 mix-blend-difference flex flex-col items-center">
+                    <MaskedText delay={2} className="mb-2">
+                        <h1 className="text-5xl md:text-8xl font-bold tracking-tighter text-white/90 leading-[0.9] select-none">
+                            Naveen
+                        </h1>
+                    </MaskedText>
+                    <MaskedText delay={2.1} className="mb-6">
+                        <h1 className="text-5xl md:text-8xl font-bold tracking-tighter text-white/90 leading-[0.9] select-none">
+                            Saragadam
+                        </h1>
+                    </MaskedText>
                 </div>
 
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 1 }}
+                    transition={{ duration: 1, delay: 2.5 }}
                     className="relative z-10 flex items-center justify-center text-sm md:text-xl font-medium tracking-[0.2em] uppercase text-white/60"
                 >
                     <span className="mr-3 text-blue-500 font-bold">_</span>
