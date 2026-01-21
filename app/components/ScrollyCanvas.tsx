@@ -36,7 +36,7 @@ export default function ScrollyCanvas({ onLoaded }: { onLoaded?: () => void }) {
             // To be safe, I should probably rename them to a standard sequence like frame_000.png, frame_001.png etc.
             // I will do that in the next tool call. For now, I'll write the code expecting standardized names.
 
-            img.src = `/sequence/frame_${frameIndex}.png`
+            img.src = `/sequence/frame_${frameIndex}.webp`
             img.onload = () => {
                 loadedCount++
                 if (loadedCount === frameCount) {
