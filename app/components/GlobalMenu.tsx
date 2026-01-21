@@ -88,7 +88,7 @@ export default function GlobalMenu() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
                 onClick={() => setIsOpen(true)}
-                className="fixed top-8 right-8 z-[60] w-12 h-12 md:w-20 md:h-20 flex items-center justify-center mix-blend-difference group"
+                className="fixed top-8 right-8 z-50 w-[51.4px] h-[51.4px] md:w-[68.5px] md:h-[68.5px] flex items-center justify-center mix-blend-difference group"
                 aria-label="Open Menu"
             >
                 <div className="relative w-10 h-10 md:w-14 md:h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-all duration-300">
