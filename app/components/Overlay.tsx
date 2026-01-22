@@ -27,17 +27,19 @@ const ScrollIndicator = ({ opacity }: { opacity: any }) => {
             transition={{ duration: 1, delay: 3 }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-            <div className="w-[22px] h-[36px] rounded-full border-[2.5px] border-white flex justify-center p-1.5">
+            <div className="w-[24px] h-[50px] rounded-full border-2 border-white/80 dark:border-white/80 flex justify-center pt-2 box-border shadow-sm">
                 <motion.div
                     animate={{
-                        y: [0, 12, 0],
+                        y: [24, 0],
+                        opacity: [0, 1, 0], // Fade in, move up, fade out? Or just 1->0
                     }}
                     transition={{
-                        duration: 1.5,
+                        duration: 3,
                         repeat: Infinity,
-                        ease: "easeInOut",
+                        ease: "easeOut",
+                        repeatDelay: 0
                     }}
-                    className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                    className="w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
                 />
             </div>
         </motion.div>
@@ -73,7 +75,7 @@ export default function Overlay() {
                     {/* Gradient text reflecting ambient lighting */}
                     <MaskedText delay={2} className="">
                         <h1
-                            className="text-[3.4875rem] md:text-[5.5125rem] lg:text-[7.3125rem] font-medium tracking-tight leading-[0.95] mb-0 select-none"
+                            className="text-[3.84rem] md:text-[6.06rem] lg:text-[8.04rem] font-medium tracking-tight leading-[0.95] mb-0 select-none"
                             style={{
                                 background: 'linear-gradient(135deg, rgba(147, 197, 253, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.85) 60%, rgba(251, 191, 136, 0.95) 100%)',
                                 WebkitBackgroundClip: 'text',
@@ -84,7 +86,7 @@ export default function Overlay() {
                             Naveen
                         </h1>
                         <h1
-                            className="text-[3.4875rem] md:text-[5.5125rem] lg:text-[7.3125rem] font-medium tracking-tight leading-[1.2] -mt-3 select-none"
+                            className="text-[3.84rem] md:text-[6.06rem] lg:text-[8.04rem] font-medium tracking-tight leading-[1.2] -mt-3 select-none"
                             style={{
                                 background: 'linear-gradient(135deg, rgba(147, 197, 253, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.85) 60%, rgba(251, 191, 136, 0.95) 100%)',
                                 WebkitBackgroundClip: 'text',
