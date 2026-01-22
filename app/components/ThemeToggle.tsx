@@ -18,7 +18,7 @@ export default function ThemeToggle() {
     return (
         <button
             onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-2 rounded-full text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
             aria-label="Toggle Theme"
         >
             {resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
