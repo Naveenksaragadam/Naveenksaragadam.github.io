@@ -28,9 +28,10 @@ const menuItems: { category: string; items: MenuItem[] }[] = [
     {
         category: "Pages",
         items: [
-            { name: 'Home', href: '#home', icon: Home, description: 'Go to homepage' },
-            { name: 'Projects', href: '#work', icon: Briefcase, description: 'View my selected work' },
-            { name: 'Contact', href: '#contact', icon: Mail, description: 'Get in touch' },
+            { name: 'Home', href: '/#home', icon: Home, description: 'Go to homepage' },
+            { name: 'Projects', href: '/#work', icon: Briefcase, description: 'View my selected work' },
+            { name: 'Blog', href: '/blog', icon: Command, description: 'Thoughts & stories' },
+            { name: 'Contact', href: '/#contact', icon: Mail, description: 'Get in touch' },
         ]
     },
     {
