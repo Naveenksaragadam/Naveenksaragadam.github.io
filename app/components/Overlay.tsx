@@ -18,7 +18,9 @@ const MaskedText = ({ children, delay = 0, className = "" }: { children: React.R
     )
 }
 
-const ScrollIndicator = ({ opacity }: { opacity: any }) => {
+import { MotionValue } from 'framer-motion'
+
+const ScrollIndicator = ({ opacity }: { opacity: MotionValue<number> }) => {
     return (
         <motion.div
             style={{ opacity }}
