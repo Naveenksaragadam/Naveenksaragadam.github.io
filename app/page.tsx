@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import ScrollyCanvas from "./components/ScrollyCanvas";
 import Overlay from "./components/Overlay";
@@ -12,9 +11,10 @@ import Footer from "./components/Footer";
 import Noise from "./components/Noise";
 import GlobalMenu from "./components/GlobalMenu";
 import Preloader from "./components/Preloader";
+import { useLoading } from "./components/Providers";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
+  const { isLoading, setIsLoading } = useLoading()
 
   return (
     <main id="home" className="relative w-full bg-[#121212]">
