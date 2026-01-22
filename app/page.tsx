@@ -38,7 +38,7 @@ export default function Home() {
         ScrollyCanvas loads images in background. 
         We no longer let it control isLoading to enforce the 2s preloader aesthetic.
       */}
-      <ScrollyCanvas onLoaded={() => { }} />
+      <ScrollyCanvas />
 
       <Overlay />
 
