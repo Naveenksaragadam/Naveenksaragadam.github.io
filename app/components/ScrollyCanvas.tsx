@@ -70,7 +70,7 @@ export default function ScrollyCanvas({ onLoaded }: { onLoaded?: () => void }) {
                 // Object-fit: cover logic
                 const hRatio = canvas.width / img.width
                 const vRatio = canvas.height / img.height
-                const ratio = Math.max(hRatio, vRatio)
+                const ratio = Math.max(hRatio, vRatio) * 1.2
 
                 const centerShift_x = (canvas.width - img.width * ratio) / 2
                 const centerShift_y = (canvas.height - img.height * ratio) / 2
@@ -114,7 +114,7 @@ export default function ScrollyCanvas({ onLoaded }: { onLoaded?: () => void }) {
     return (
         <div className="h-[500vh] w-full relative">
             <div className="sticky top-0 h-screen w-full overflow-hidden">
-                <canvas ref={canvasRef} className="block w-full h-full scale-[1.05]" />
+                <canvas ref={canvasRef} className="block w-full h-full" />
             </div>
         </div>
     )
