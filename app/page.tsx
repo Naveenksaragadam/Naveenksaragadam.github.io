@@ -17,7 +17,7 @@ export default function Home() {
   const { isLoading, setIsLoading } = useLoading()
 
   return (
-    <main id="home" className="relative w-full bg-[#121212]">
+    <main id="home" className="relative w-full">
       {/* 
         Preloader handles the initial load animation (Odometer + Curtain Reveal).
         It signals onComplete when the exit animation finishes.
