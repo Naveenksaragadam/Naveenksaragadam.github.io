@@ -29,7 +29,7 @@ export default function ContributionGraph() {
                 className="flex flex-col items-center mb-16"
             >
                 <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-2">Open Source</div>
-                <h2 className="text-4xl md:text-6xl font-serif font-bold text-white text-center">
+                <h2 className="text-4xl md:text-6xl font-serif font-bold text-zinc-900 dark:text-white text-center">
                     Code & <span className="bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">Contributions</span>
                 </h2>
             </motion.div>
@@ -39,21 +39,21 @@ export default function ContributionGraph() {
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    className="lg:col-span-2 bg-[#0d1117] rounded-3xl border border-white/10 p-8 shadow-2xl overflow-hidden relative"
+                    className="lg:col-span-2 bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-8 shadow-2xl overflow-hidden relative transition-colors duration-300"
                 >
                     <div className="absolute top-0 right-0 p-8 text-right">
-                        <div className="text-3xl font-bold text-white mb-1">
+                        <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
                             <CountUp end={1807} duration={2} separator="," />
                         </div>
                         <div className="text-xs text-zinc-500 uppercase tracking-wider">2025 Total</div>
                     </div>
 
                     <div className="flex items-center gap-4 mb-10">
-                        <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-                            <Github className="w-6 h-6 text-white" />
+                        <div className="w-12 h-12 rounded-full bg-zinc-100 dark:bg-white/10 flex items-center justify-center">
+                            <Github className="w-6 h-6 text-zinc-900 dark:text-white" />
                         </div>
                         <div>
-                            <div className="text-white font-bold">@Naveenksaragadam</div>
+                            <div className="text-zinc-900 dark:text-white font-bold">@Naveenksaragadam</div>
                             <div className="text-zinc-500 text-sm">Contribution Graph</div>
                         </div>
                     </div>
@@ -91,10 +91,10 @@ export default function ContributionGraph() {
                     {/* Followers */}
                     <motion.div
                         whileHover={{ scale: 1.02 }}
-                        className="bg-[#0d1117] rounded-3xl border border-white/10 p-6 flex items-center justify-between"
+                        className="bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-6 flex items-center justify-between transition-colors duration-300"
                     >
                         <div>
-                            <div className="text-zinc-400 text-sm mb-1">Followers</div>
+                            <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Followers</div>
                             <div className="text-4xl font-bold text-pink-500">
                                 <CountUp end={319} duration={2} />
                             </div>
@@ -115,10 +115,10 @@ export default function ContributionGraph() {
                     {/* Forks */}
                     <motion.div
                         whileHover={{ scale: 1.02 }}
-                        className="bg-[#0d1117] rounded-3xl border border-white/10 p-6 flex items-center justify-between"
+                        className="bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-6 flex items-center justify-between transition-colors duration-300"
                     >
                         <div>
-                            <div className="text-zinc-400 text-sm mb-1">Forks</div>
+                            <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Forks</div>
                             <div className="text-4xl font-bold text-emerald-400">
                                 <CountUp end={74} duration={2} />
                             </div>
@@ -129,10 +129,10 @@ export default function ContributionGraph() {
                     {/* Stars */}
                     <motion.div
                         whileHover={{ scale: 1.02 }}
-                        className="bg-[#0d1117] rounded-3xl border border-white/10 p-6 flex items-center justify-between"
+                        className="bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-6 flex items-center justify-between transition-colors duration-300"
                     >
                         <div>
-                            <div className="text-zinc-400 text-sm mb-1">Stars</div>
+                            <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Stars</div>
                             <div className="text-4xl font-bold text-yellow-400">
                                 <CountUp end={505} duration={2} />
                             </div>

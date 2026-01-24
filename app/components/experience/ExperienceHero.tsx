@@ -22,7 +22,7 @@ export default function ExperienceHero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-tight">
+                    <h1 className="text-5xl md:text-7xl font-serif font-bold text-zinc-900 dark:text-white leading-tight">
                         I'm Naveen, a <br />
                         <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 bg-clip-text text-transparent">
                             Data Engineer
@@ -34,10 +34,10 @@ export default function ExperienceHero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.8 }}
-                    className="text-lg md:text-xl text-zinc-400 font-light max-w-lg leading-relaxed"
+                    className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-light max-w-lg leading-relaxed"
                 >
-                    Specializing in <span className="text-zinc-200 font-medium">Medallion Architecture</span> and high-performance ETL pipelines.
-                    Migrating legacy infrastructure to the modern <span className="text-zinc-200 font-medium">Lakehouse</span>.
+                    Specializing in <span className="text-zinc-900 dark:text-zinc-200 font-medium">Medallion Architecture</span> and high-performance ETL pipelines.
+                    Migrating legacy infrastructure to the modern <span className="text-zinc-900 dark:text-zinc-200 font-medium">Lakehouse</span>.
                 </motion.p>
             </div>
 
@@ -47,7 +47,7 @@ export default function ExperienceHero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
-                    className="absolute top-0 right-10 text-xs font-mono text-zinc-600 tracking-widest uppercase rotate-90 origin-top-right"
+                    className="absolute top-0 right-10 text-xs font-mono text-zinc-500 dark:text-zinc-600 tracking-widest uppercase rotate-90 origin-top-right"
                 >
                     // I Build
                 </motion.div>
@@ -65,12 +65,12 @@ export default function ExperienceHero() {
                             }}
                             whileHover={{ scale: 1.1, rotate: 0, zIndex: 50 }}
                             style={{ zIndex: card.z }}
-                            className="absolute inset-0 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xl shadow-2xl flex flex-col items-center justify-center gap-3 group"
+                            className="absolute inset-0 rounded-2xl border border-zinc-200 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-xl shadow-2xl flex flex-col items-center justify-center gap-3 group transition-colors duration-300"
                         >
                             <div className={`p-4 rounded-xl ${card.color}/10 border border-${card.color.split('-')[1]}-500/20 group-hover:bg-${card.color.split('-')[1]}-500/20 transition-colors`}>
-                                <card.icon className={`w-10 h-10 text-${card.color.split('-')[1]}-400`} />
+                                <card.icon className={`w-10 h-10 text-${card.color.split('-')[1]}-500 dark:text-${card.color.split('-')[1]}-400`} />
                             </div>
-                            <span className="font-mono text-sm text-zinc-300 group-hover:text-white transition-colors">
+                            <span className="font-mono text-sm text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
                                 {card.name}
                             </span>
                         </motion.div>

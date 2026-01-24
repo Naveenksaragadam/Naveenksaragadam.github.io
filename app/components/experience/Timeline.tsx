@@ -34,12 +34,12 @@ export default function Timeline() {
             <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="text-4xl md:text-5xl font-serif font-bold text-white mb-24 text-center md:text-left md:pl-20"
+                className="text-4xl md:text-5xl font-serif font-bold text-zinc-900 dark:text-white mb-24 text-center md:text-left md:pl-20"
             >
                 Experience That <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Delivers Impact</span>
             </motion.h2>
 
-            <div className="relative border-l border-white/10 md:ml-10 space-y-24 pl-8 md:pl-24">
+            <div className="relative border-l border-zinc-200 dark:border-white/10 md:ml-10 space-y-24 pl-8 md:pl-24 transition-colors duration-300">
                 {/* Scroll Progress Bead */}
                 <motion.div
                     style={{ height }}
@@ -56,31 +56,31 @@ export default function Timeline() {
                         className="relative group"
                     >
                         {/* Glow Bead for Item */}
-                        <div className="absolute left-[-37px] md:left-[-101px] top-2 w-4 h-4 rounded-full bg-[#050505] border border-white/20 group-hover:border-purple-500 group-hover:scale-125 transition-all duration-300 shadow-[0_0_0_4px_rgba(0,0,0,1)] z-10">
+                        <div className="absolute left-[-37px] md:left-[-101px] top-2 w-4 h-4 rounded-full bg-white dark:bg-[#050505] border border-zinc-300 dark:border-white/20 group-hover:border-purple-500 group-hover:scale-125 transition-all duration-300 shadow-[0_0_0_4px_rgba(255,255,255,1)] dark:shadow-[0_0_0_4px_rgba(0,0,0,1)] z-10">
                             <div className="absolute inset-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
 
                         <div className="flex flex-col md:flex-row gap-4 md:items-baseline mb-4">
-                            <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-zinc-400 transition-colors">
+                            <h3 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-zinc-900 group-hover:to-zinc-600 dark:group-hover:from-white dark:group-hover:to-zinc-400 transition-colors">
                                 {exp.company}
                             </h3>
-                            <span className="text-zinc-500 font-mono text-sm md:text-base">
+                            <span className="text-zinc-500 dark:text-zinc-500 font-mono text-sm md:text-base">
                                 {exp.role} | {exp.period}
                             </span>
                         </div>
 
-                        <p className="text-lg text-zinc-300 font-light leading-relaxed max-w-2xl mb-6">
+                        <p className="text-lg text-zinc-600 dark:text-zinc-300 font-light leading-relaxed max-w-2xl mb-6">
                             {exp.impact.split('30%').map((part, index, arr) => (
                                 <span key={index}>
                                     {part}
-                                    {index < arr.length - 1 && <span className="font-bold text-white">30%</span>}
+                                    {index < arr.length - 1 && <span className="font-bold text-zinc-900 dark:text-white">30%</span>}
                                 </span>
                             ))}
                         </p>
 
                         <div className="flex flex-wrap gap-2">
                             {exp.tech.map((t) => (
-                                <span key={t} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-400 group-hover:border-purple-500/30 group-hover:text-purple-200 transition-colors">
+                                <span key={t} className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-xs font-mono text-zinc-600 dark:text-zinc-400 group-hover:border-purple-500/30 group-hover:text-purple-600 dark:group-hover:text-purple-200 transition-colors">
                                     {t}
                                 </span>
                             ))}

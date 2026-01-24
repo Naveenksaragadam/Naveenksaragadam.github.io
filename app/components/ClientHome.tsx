@@ -30,8 +30,6 @@ export default function ClientHome() {
 
             <Noise />
             <ScrollProgress />
-            <Logo />
-            <GlobalMenu />
             <Navbar />
 
             {/* 
@@ -48,7 +46,6 @@ export default function ClientHome() {
                 transition={{ duration: 1, delay: 0.5 }}
             >
                 <Projects />
-                <Footer />
             </motion.div>
 
         </main>

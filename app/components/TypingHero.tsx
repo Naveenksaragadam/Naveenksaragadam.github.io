@@ -31,7 +31,7 @@ export default function TypingHero() {
                     />
                 </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 mt-6 max-w-2xl leading-relaxed">
+            <p className="text-xl md:text-2xl text-zinc-600 dark:text-gray-400 mt-6 max-w-2xl leading-relaxed">
                 A passionate developer pursuing a degree in Computer Science. I believe in the power of authenticity and strive to maintain a true reflection of myself in all my professional endeavors.
             </p>
         </motion.div>

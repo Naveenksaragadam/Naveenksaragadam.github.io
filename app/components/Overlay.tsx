@@ -29,11 +29,11 @@ const ScrollIndicator = ({ opacity }: { opacity: MotionValue<number> }) => {
             transition={{ duration: 1, delay: 3 }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-            <div className="w-[24px] h-[50px] rounded-full border-2 border-white/80 dark:border-white/80 flex justify-center pt-2 box-border shadow-sm">
+            <div className="w-[24px] h-[50px] rounded-full border-2 border-zinc-400/80 dark:border-white/80 flex justify-center pt-2 box-border shadow-sm">
                 <motion.div
                     animate={{
                         y: [24, 0],
-                        opacity: [0, 1, 0], // Fade in, move up, fade out? Or just 1->0
+                        opacity: [0, 1, 0],
                     }}
                     transition={{
                         duration: 3,
@@ -41,7 +41,7 @@ const ScrollIndicator = ({ opacity }: { opacity: MotionValue<number> }) => {
                         ease: "easeOut",
                         repeatDelay: 0
                     }}
-                    className="w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                    className="w-2.5 h-2.5 rounded-full bg-zinc-900 dark:bg-white shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_10px_rgba(255,255,255,0.8)]"
                 />
             </div>
         </motion.div>
@@ -74,29 +74,21 @@ export default function Overlay() {
                 className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center p-8 text-center pt-[15vh]"
             >
                 <div className="relative z-10 flex flex-col items-center gap-0">
-                    {/* Gradient text reflecting ambient lighting */}
+                    {/* Gradient text reflecting ambient lighting - Adjusted for light mode */}
                     <MaskedText delay={2} className="">
                         <h1
                             className="text-[3.84rem] md:text-[6.06rem] lg:text-[8.04rem] font-medium tracking-tight leading-[0.95] mb-0 select-none"
-                            style={{
-                                background: 'linear-gradient(135deg, rgba(147, 197, 253, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.85) 60%, rgba(251, 191, 136, 0.95) 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text',
-                            }}
                         >
-                            Naveen
+                            <span className="bg-clip-text text-transparent bg-gradient-to-br from-blue-300 via-white to-orange-200">
+                                Naveen
+                            </span>
                         </h1>
                         <h1
                             className="text-[3.84rem] md:text-[6.06rem] lg:text-[8.04rem] font-medium tracking-tight leading-[1.2] -mt-3 select-none"
-                            style={{
-                                background: 'linear-gradient(135deg, rgba(147, 197, 253, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.85) 60%, rgba(251, 191, 136, 0.95) 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text',
-                            }}
                         >
-                            Saragadam
+                            <span className="bg-clip-text text-transparent bg-gradient-to-br from-blue-300 via-white to-orange-200">
+                                Saragadam
+                            </span>
                         </h1>
                     </MaskedText>
                 </div>
@@ -125,13 +117,13 @@ export default function Overlay() {
                 className="fixed top-0 left-0 h-screen w-full flex items-center justify-end pr-6 md:pr-16 pointer-events-none"
             >
                 <div className="text-right max-w-3xl">
-                    <h2 className="text-2xl md:text-5xl lg:text-6xl font-light text-white/90 mb-6 leading-[1.1] tracking-tight">
+                    <h2 className="text-2xl md:text-5xl lg:text-6xl font-light text-zinc-200 mb-6 leading-[1.1] tracking-tight">
                         Modernizing Infrastructure for <br />
-                        <span className="bg-gradient-to-r from-orange-300 via-orange-400 to-red-400 bg-clip-text text-transparent font-normal">Fortune 100</span> Leaders.
+                        <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 bg-clip-text text-transparent font-normal">Fortune 100</span> Leaders.
                     </h2>
-                    <p className="text-base md:text-lg text-white/70 leading-relaxed font-light max-w-lg ml-auto">
-                        Driving transformation at <span className="text-white/85">Target</span> and <span className="text-white/85">General Motors</span>.
-                        I specialize in <span className="text-white/85">Scalable Data Pipelines</span> and <span className="text-white/85">Lakehouse Architectures</span>.
+                    <p className="text-base md:text-lg text-zinc-400 leading-relaxed font-light max-w-lg ml-auto">
+                        Driving transformation at <span className="text-zinc-100 font-normal">Target</span> and <span className="text-zinc-100 font-normal">General Motors</span>.
+                        I specialize in <span className="text-zinc-100 font-normal">Scalable Data Pipelines</span> and <span className="text-zinc-100 font-normal">Lakehouse Architectures</span>.
                     </p>
                 </div>
             </motion.div>
@@ -142,12 +134,12 @@ export default function Overlay() {
                 className="fixed top-0 left-0 h-screen w-full flex items-center justify-start pl-6 md:pl-16 pointer-events-none"
             >
                 <div className="max-w-3xl">
-                    <h2 className="text-2xl md:text-5xl lg:text-6xl font-light text-white/90 mb-6 leading-[1.1] tracking-tight">
-                        Reduced pipeline runtimes <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent font-normal">30%</span> on <br /> terabyte-scale datasets.
+                    <h2 className="text-2xl md:text-5xl lg:text-6xl font-light text-zinc-200 mb-6 leading-[1.1] tracking-tight">
+                        Reduced pipeline runtimes <span className="bg-gradient-to-r from-blue-300 via-cyan-200 to-blue-400 bg-clip-text text-transparent font-normal">30%</span> on <br /> terabyte-scale datasets.
                     </h2>
-                    <p className="text-base md:text-lg text-white/70 leading-relaxed font-light max-w-2xl">
-                        I migrated <span className="text-white/85">20+ legacy Hadoop/Hive systems</span> to PySpark, supporting 300+ downstream reports.
-                        My robust data quality frameworks ensure <span className="text-white/85">99.9% SLA reliability</span>.
+                    <p className="text-base md:text-lg text-zinc-400 leading-relaxed font-light max-w-2xl">
+                        I migrated <span className="text-zinc-100 font-normal">20+ legacy Hadoop/Hive systems</span> to PySpark, supporting 300+ downstream reports.
+                        My robust data quality frameworks ensure <span className="text-zinc-100 font-normal">99.9% SLA reliability</span>.
                     </p>
                 </div>
             </motion.div>

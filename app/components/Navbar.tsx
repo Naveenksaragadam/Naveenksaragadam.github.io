@@ -9,7 +9,6 @@ import ThemeToggle from './ThemeToggle'
 const navItems = [
     { name: 'Home', href: '/', id: 'home' },
     { name: 'Journey', href: '/experience', id: 'experience' },
-    { name: 'About', href: '/about', id: 'about' },
     { name: 'Work', href: '/work', id: 'work' },
 ]
 
@@ -24,8 +23,7 @@ export default function Navbar() {
         window.addEventListener('scroll', handleScroll)
 
         // simple pathname check for active tab
-        if (pathname === '/about') setActiveTab('about')
-        else if (pathname === '/work') setActiveTab('work')
+        if (pathname === '/work') setActiveTab('work')
         else if (pathname === '/experience') setActiveTab('experience')
         else setActiveTab('home')
 
@@ -45,7 +43,7 @@ export default function Navbar() {
 
                 <motion.div
                     layout
-                    className="relative flex items-center gap-1.5 bg-[#121212]/50 backdrop-blur-2xl border border-white/[0.08] p-2 rounded-full shadow-2xl shadow-black/50 pointer-events-auto overflow-hidden ring-1 ring-white/5"
+                    className="relative flex items-center gap-1.5 bg-white/70 dark:bg-[#121212]/50 backdrop-blur-2xl border border-zinc-200 dark:border-white/[0.08] p-2 rounded-full shadow-lg dark:shadow-black/50 pointer-events-auto overflow-hidden ring-1 ring-zinc-900/5 dark:ring-white/5 transition-colors duration-300"
                 >
                     {navItems.map((item) => {
                         const isActive = activeTab === item.id
@@ -57,14 +55,14 @@ export default function Navbar() {
                                 className={`
                                     relative px-6 py-2.5 rounded-full text-base font-medium transition-all duration-300
                                     ${isActive
-                                        ? 'text-white shadow-[0_1px_10px_rgba(255,255,255,0.05)]'
-                                        : 'text-white/60 hover:text-white hover:bg-white/5'}
+                                        ? 'text-zinc-900 dark:text-white shadow-sm'
+                                        : 'text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5'}
                                 `}
                             >
                                 {isActive && (
                                     <motion.div
                                         layoutId="active-pill"
-                                        className="absolute inset-0 bg-white/[0.1] rounded-full ring-1 ring-white/[0.05]"
+                                        className="absolute inset-0 bg-white shadow-sm ring-1 ring-zinc-200 dark:bg-white/[0.1] rounded-full dark:ring-white/[0.05]"
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}

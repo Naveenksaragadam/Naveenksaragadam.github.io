@@ -11,11 +11,11 @@ const techStack = [
 export default function TechStack() {
     return (
         <div className="w-full py-12 overflow-hidden relative">
-            {/* Fade edges */}
-            <div className="absolute inset-y-0 left-0 w-20 z-10 bg-gradient-to-r from-gray-50 dark:from-[#121212] to-transparent pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-20 z-10 bg-gradient-to-l from-gray-50 dark:from-[#121212] to-transparent pointer-events-none" />
+            {/* Fade edges - use white for light mode to match page bg */}
+            <div className="absolute inset-y-0 left-0 w-20 z-10 bg-gradient-to-r from-white dark:from-[#121212] to-transparent pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-20 z-10 bg-gradient-to-l from-white dark:from-[#121212] to-transparent pointer-events-none" />
 
-            <h3 className="text-center text-sm font-semibold uppercase tracking-widest text-gray-500 mb-8">
+            <h3 className="text-center text-sm font-semibold uppercase tracking-widest text-zinc-400 dark:text-gray-500 mb-8">
                 My Tech Stack
             </h3>
 
@@ -33,7 +33,7 @@ export default function TechStack() {
                     {[...techStack, ...techStack].map((tech, index) => (
                         <div
                             key={index}
-                            className="text-2xl md:text-4xl font-bold text-gray-300 dark:text-white/20 hover:text-blue-500 dark:hover:text-white transition-colors cursor-default"
+                            className="text-2xl md:text-4xl font-bold text-zinc-300 dark:text-white/20 hover:text-blue-500 dark:hover:text-white transition-colors cursor-default"
                         >
                             {tech}
                         </div>

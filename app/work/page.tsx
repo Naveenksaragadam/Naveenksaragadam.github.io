@@ -12,8 +12,6 @@ export default function Work() {
             <div className="pt-20">
                 <Projects />
             </div>
-
-            <Footer />
         </main>
     )
 }

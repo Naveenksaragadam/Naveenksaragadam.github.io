@@ -16,8 +16,24 @@ export const useLoading = () => useContext(LoadingContext)
 export function Providers({ children }: { children: React.ReactNode }) {
     const [isLoading, setIsLoading] = useState(true)
 
+    useEffect(() => {
+        // Check if we've already loaded in this session
+        const hasLoaded = sessionStorage.getItem('hasLoaded')
+        if (hasLoaded) {
+            setIsLoading(false)
+        }
+    }, [])
+
+    const handleSetIsLoading = (value: boolean) => {
+        setIsLoading(value)
+        if (!value) {
+            // Unlocking: Mark session as loaded
+            sessionStorage.setItem('hasLoaded', 'true')
+        }
+    }
+
     return (
-        <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+        <LoadingContext.Provider value={{ isLoading, setIsLoading: handleSetIsLoading }}>
             <ThemeProvider
                 attribute="class"
                 defaultTheme="system"

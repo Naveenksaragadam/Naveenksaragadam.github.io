@@ -73,7 +73,7 @@ function SlidingColumn({ digit }: { digit: number }) {
         <div className="relative h-[1em] w-[0.6em] overflow-hidden">
             <motion.div
                 animate={{ y: `-${digit * 10}%` }} // Moves by 10% increments (container height must be 1em, inner height 10em)
-                transition={{ type: "spring", stiffness: 60, damping: 15 }}
+                transition={{ type: "spring", stiffness: 200, damping: 25, mass: 0.5 }} // Snappier spring
                 className="flex flex-col"
                 style={{ height: '10em' }} // Height to hold 10 digits
             >

@@ -89,11 +89,11 @@ export default function GlobalMenu() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
                 onClick={() => setIsOpen(true)}
-                className="fixed top-8 right-8 z-50 w-[51.4px] h-[51.4px] md:w-[68.5px] md:h-[68.5px] flex items-center justify-center mix-blend-difference group"
+                className="fixed top-8 right-8 z-50 w-[51.4px] h-[51.4px] md:w-[68.5px] md:h-[68.5px] flex items-center justify-center group"
                 aria-label="Open Menu"
             >
-                <div className="relative w-10 h-10 md:w-14 md:h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-all duration-300">
-                    <Command className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                <div className="relative w-10 h-10 md:w-14 md:h-14 bg-white/80 dark:bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-zinc-200 dark:border-white/20 group-hover:bg-zinc-100 dark:group-hover:bg-white/20 transition-all duration-300 shadow-lg">
+                    <Command className="w-5 h-5 md:w-6 md:h-6 text-zinc-900 dark:text-white" />
                 </div>
             </motion.button>
 
@@ -107,7 +107,7 @@ export default function GlobalMenu() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsOpen(false)}
-                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                            className="absolute inset-0 bg-zinc-100/80 dark:bg-black/60 backdrop-blur-sm"
                         />
 
                         {/* Modal */}
@@ -116,30 +116,30 @@ export default function GlobalMenu() {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: -20 }}
                             transition={{ duration: 0.2 }}
-                            className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]"
+                            className="relative w-full max-w-2xl bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh] transition-colors duration-300"
                         >
                             {/* Header / Search */}
-                            <div className="flex items-center px-4 py-4 border-b border-white/10 shrink-0">
-                                <Search className="w-5 h-5 text-white/40 mr-3" />
+                            <div className="flex items-center px-4 py-4 border-b border-zinc-200 dark:border-white/10 shrink-0">
+                                <Search className="w-5 h-5 text-zinc-400 dark:text-white/40 mr-3" />
                                 <input
                                     autoFocus
                                     type="text"
                                     placeholder="Type a command or search..."
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
-                                    className="flex-1 bg-transparent text-lg text-white placeholder-white/20 outline-none"
-                                    aria-label="Search menu items"
+                                    className="flex-1 bg-transparent text-lg text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-white/20 outline-none"
+                                    aria-label="Search navigation items"
                                 />
                                 <div className="flex items-center gap-2">
-                                    <span className="hidden md:flex items-center gap-1 px-2 py-1 rounded bg-white/5 border border-white/10 text-xs text-white/40 font-mono">
+                                    <span className="hidden md:flex items-center gap-1 px-2 py-1 rounded bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-xs text-zinc-500 dark:text-white/40 font-mono">
                                         <span className="text-[10px]">ESC</span>
                                     </span>
                                     <button
                                         onClick={() => setIsOpen(false)}
-                                        className="p-1 hover:bg-white/10 rounded-md transition-colors"
+                                        className="p-1 hover:bg-zinc-100 dark:hover:bg-white/10 rounded-md transition-colors"
                                         aria-label="Close Menu"
                                     >
-                                        <X className="w-5 h-5 text-white/40" />
+                                        <X className="w-5 h-5 text-zinc-500 dark:text-white/40" />
                                     </button>
                                 </div>
                             </div>
@@ -147,14 +147,14 @@ export default function GlobalMenu() {
                             {/* Content */}
                             <div className="overflow-y-auto p-2 scrollbar-hide">
                                 {filteredGroups.length === 0 ? (
-                                    <div className="py-12 text-center text-white/30 text-sm">
+                                    <div className="py-12 text-center text-zinc-400 dark:text-white/30 text-sm">
                                         No results found.
                                     </div>
                                 ) : (
                                     <div className="space-y-6 p-2">
                                         {filteredGroups.map((group) => (
                                             <div key={group.category}>
-                                                <h3 className="px-3 text-xs font-semibold text-white/30 uppercase tracking-wider mb-2">
+                                                <h3 className="px-3 text-xs font-semibold text-zinc-500 dark:text-white/30 uppercase tracking-wider mb-2">
                                                     {group.category}
                                                 </h3>
                                                 <div className="space-y-1">
@@ -165,23 +165,23 @@ export default function GlobalMenu() {
                                                             target={item.external ? "_blank" : undefined}
                                                             rel={item.external ? "noopener noreferrer" : undefined}
                                                             onClick={() => setIsOpen(false)}
-                                                            className="group flex items-center justify-between px-3 py-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer"
+                                                            className="group flex items-center justify-between px-3 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
                                                         >
                                                             <div className="flex items-center gap-4">
-                                                                <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/60 group-hover:text-orange-400 group-hover:border-orange-500/30 transition-colors">
+                                                                <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 dark:text-white/60 group-hover:text-orange-500 dark:group-hover:text-orange-400 group-hover:border-orange-200 dark:group-hover:border-orange-500/30 transition-colors">
                                                                     <item.icon className="w-5 h-5" />
                                                                 </div>
                                                                 <div>
-                                                                    <div className="text-white font-medium group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-red-500 transition-all">
+                                                                    <div className="text-zinc-900 dark:text-white font-medium group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-500 group-hover:to-red-600 dark:group-hover:from-orange-400 dark:group-hover:to-red-500 transition-all">
                                                                         {item.name}
                                                                     </div>
-                                                                    <div className="text-white/40 text-sm">
+                                                                    <div className="text-zinc-500 dark:text-white/40 text-sm">
                                                                         {item.description}
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             {item.external && (
-                                                                <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                                                <ArrowRight className="w-4 h-4 text-zinc-400 dark:text-white/20 group-hover:text-zinc-600 dark:group-hover:text-white/60 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                                                             )}
                                                         </Link>
                                                     ))}
@@ -193,7 +193,7 @@ export default function GlobalMenu() {
                             </div>
 
                             {/* Footer */}
-                            <div className="px-4 py-3 bg-white/5 border-t border-white/10 flex items-center justify-between text-[10px] text-white/30 uppercase tracking-wider shrink-0">
+                            <div className="px-4 py-3 bg-zinc-50 dark:bg-white/5 border-t border-zinc-200 dark:border-white/10 flex items-center justify-between text-[10px] text-zinc-500 dark:text-white/30 uppercase tracking-wider shrink-0 transition-colors duration-300">
                                 <div>Navigation</div>
                                 <div className="flex items-center gap-4">
                                     <span className="flex items-center gap-1">

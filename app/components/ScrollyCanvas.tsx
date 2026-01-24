@@ -168,7 +168,14 @@ export default function ScrollyCanvas() {
             renderFrame(scrollYProgress.get()) // Initial render
         }
 
-        window.addEventListener('resize', resizeCanvas)
+        // Debounce resize
+        let resizeTimeout: NodeJS.Timeout
+        const handleResize = () => {
+            clearTimeout(resizeTimeout)
+            resizeTimeout = setTimeout(resizeCanvas, 100)
+        }
+
+        window.addEventListener('resize', handleResize)
         resizeCanvas()
 
         // Subscribe to scroll changes
@@ -177,13 +184,18 @@ export default function ScrollyCanvas() {
         })
 
         return () => {
-            window.removeEventListener('resize', resizeCanvas)
+            window.removeEventListener('resize', handleResize)
+            clearTimeout(resizeTimeout)
             unsubscribe()
         }
     }, [scrollYProgress, images])
 
     return (
-        <div className="h-[500vh] w-full relative">
+        <div
+            className="h-[500vh] w-full relative"
+            role="img"
+            aria-label="3D scrolling animation sequence showing technical visualization"
+        >
             <div className="sticky top-0 h-screen w-full overflow-hidden">
                 <canvas ref={canvasRef} className="block w-full h-full" />
             </div>
