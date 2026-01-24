@@ -10,7 +10,6 @@ const education = [
         university: "University of Arizona",
         location: "Tucson, AZ",
         period: "2023 - 2025",
-        year: "2025",
         gpa: "3.8/4.00",
         courses: [
             "Foundations of Information",
@@ -29,7 +28,6 @@ const education = [
         university: "Bharath University",
         location: "Chennai, India",
         period: "2017 - 2021",
-        year: "2021",
         gpa: null,
         courses: [
             "Fundamentals of Computing and Programming",
@@ -51,89 +49,75 @@ const education = [
 
 export default function Education() {
     return (
-        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 py-32 overflow-hidden bg-white dark:bg-[#050505] transition-colors duration-500">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
+        <section className="relative w-full max-w-[1920px] mx-auto px-4 md:px-0 md:pl-6 md:pr-40 py-32">
+            <motion.h2
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="mb-32 md:mb-48"
+                className="text-center font-serif text-5xl md:text-7xl text-zinc-900 dark:text-white mb-40 tracking-tight"
             >
-                <h2 className="font-serif text-5xl md:text-8xl text-zinc-900 dark:text-white tracking-tighter">
-                    Education
-                </h2>
-            </motion.div>
+                Education
+            </motion.h2>
 
-            <div className="space-y-32 md:space-y-48">
-                {education.map((edu, idx) => (
-                    <div key={idx} className="relative">
-                        {/* Massive Year Watermark */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 1, ease: "easeOut" }}
-                            className="absolute -top-20 -left-6 md:-top-32 md:-left-12 text-[120px] md:text-[240px] font-bold text-zinc-100 dark:text-zinc-900/40 select-none z-0 leading-none tracking-tighter"
-                        >
-                            {edu.year}
-                        </motion.div>
+            <div className="space-y-40 relative z-10">
+                {education.map((edu, i) => (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-10%" }}
+                        transition={{ duration: 0.8 }}
+                        className="relative grid grid-cols-1 md:grid-cols-[25%_auto_1fr] gap-0 items-start"
+                    >
+                        {/* Left Column: Date & University (Aligned with Timeline Left Col) */}
+                        <div className="md:text-right pr-12 pt-2">
+                            <h4 className="text-zinc-500 font-bold text-xs tracking-[0.2em] uppercase mb-6">{edu.period}</h4>
+                            <div className="flex justify-end items-center gap-4">
+                                <h3 className="text-3xl font-serif text-zinc-900 dark:text-white leading-tight">{edu.university}</h3>
+                            </div>
+                            <div className="flex justify-end gap-2 mt-2 text-zinc-500 text-xs font-medium uppercase tracking-wide">
+                                <span>{edu.location}</span>
+                            </div>
+                        </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr_400px] gap-12 md:gap-24 items-start pl-4 md:pl-12"
-                        >
-                            {/* Main Info */}
-                            <div>
-                                <h3 className="text-4xl md:text-6xl font-serif text-zinc-900 dark:text-white mb-4 leading-tight">
-                                    {edu.university}
-                                </h3>
-                                <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-8">
-                                    <p className="text-xl md:text-2xl font-medium text-blue-600 dark:text-blue-400">
-                                        {edu.degree}
-                                    </p>
-                                    <p className="font-mono text-sm text-zinc-500 uppercase tracking-widest">
-                                        {edu.location}
-                                    </p>
-                                </div>
+                        {/* Center Spacer / Vertical Line */}
+                        <div className="hidden md:flex flex-col items-center relative w-16 -ml-8 h-full">
+                            {/* Static Background Track (Visually connecting the education items) */}
+                            <div className="absolute top-0 bottom-0 w-px bg-zinc-200 dark:bg-zinc-800" />
+                            {/* Dot */}
+                            <div className="relative z-10 w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700 mt-3" />
+                        </div>
 
+                        {/* Right Column: Degree & Details */}
+                        <div className="pl-12">
+                            <h3 className="text-3xl font-serif text-zinc-900 dark:text-white mb-4 block md:hidden">{edu.university}</h3>
+                            <div className="flex items-baseline gap-4 mb-6">
+                                <h4 className="text-3xl md:text-4xl font-sans font-bold text-blue-600 dark:text-blue-500 tracking-tight">{edu.degree}</h4>
                                 {edu.gpa && (
-                                    <div className="inline-block border-b border-zinc-300 dark:border-zinc-700 pb-1 mb-8">
-                                        <span className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-300">GPA {edu.gpa}</span>
-                                    </div>
+                                    <span className="px-3 py-1 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-bold text-zinc-500">
+                                        GPA {edu.gpa}
+                                    </span>
                                 )}
                             </div>
 
-                            {/* Details Column */}
-                            <div className="pt-4">
-                                <div className="mb-10">
-                                    <p className="font-mono text-xs font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-widest mb-6">
-                                        Curriculum
+                            {edu.projects && (
+                                <div className="mb-8">
+                                    <p className="text-sm font-bold text-zinc-400 uppercase tracking-widest mb-2">Capstone</p>
+                                    <p className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">
+                                        {edu.projects}
                                     </p>
-                                    <div className="flex flex-wrap gap-x-4 gap-y-3">
-                                        {edu.courses.map((course) => (
-                                            <span
-                                                key={course}
-                                                className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 font-light hover:text-zinc-900 dark:hover:text-white transition-colors cursor-default"
-                                            >
-                                                {course}
-                                            </span>
-                                        ))}
-                                    </div>
                                 </div>
+                            )}
 
-                                {edu.projects && (
-                                    <div>
-                                        <p className="font-mono text-xs font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-widest mb-4">
-                                            Capstone
-                                        </p>
-                                        <p className="text-base text-zinc-800 dark:text-zinc-200 leading-relaxed font-light">
-                                            {edu.projects}
-                                        </p>
-                                    </div>
-                                )}
+                            <div className="flex flex-wrap gap-2">
+                                {edu.courses.map((course) => (
+                                    <span key={course} className="flex items-center gap-2 px-3 py-1.5 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-white transition-colors cursor-default">
+                                        {course}
+                                    </span>
+                                ))}
                             </div>
-                        </motion.div>
-                    </div>
+                        </div>
+                    </motion.div>
                 ))}
             </div>
         </section>
