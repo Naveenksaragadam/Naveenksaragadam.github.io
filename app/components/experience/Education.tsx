@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import React from 'react'
+import { motion } from 'framer-motion'
 
 const education = [
     {
@@ -47,92 +47,77 @@ const education = [
     }
 ]
 
-
 export default function Education() {
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const { currentTarget: target } = e;
-        const rect = target.getBoundingClientRect(),
-            x = e.clientX - rect.left,
-            y = e.clientY - rect.top;
-
-        target.style.setProperty("--mouse-x", `${x}px`);
-        target.style.setProperty("--mouse-y", `${y}px`);
-    };
-
     return (
-        <section className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 py-32">
+        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 py-32 bg-white dark:bg-[#050505] transition-colors duration-500">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="mb-24 text-center"
+                className="mb-24"
             >
-                <h2 className="font-serif text-5xl md:text-6xl text-white tracking-tight mb-4">
-                    Academic <span className="text-zinc-500">Credentials</span>
+                <h2 className="font-serif text-5xl md:text-7xl text-zinc-900 dark:text-white tracking-tight">
+                    Academic Background
                 </h2>
-                <div className="h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
+                <div className="h-px w-full bg-zinc-200 dark:bg-zinc-800 mt-8" />
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+            <div className="space-y-0">
                 {education.map((edu, idx) => (
                     <motion.div
                         key={idx}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: idx * 0.1 }}
-                        onMouseMove={handleMouseMove}
-                        className="group relative rounded-3xl bg-[#080808] border border-white/5 overflow-hidden transition-colors hover:border-white/10"
+                        className="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] border-b border-zinc-200 dark:border-zinc-800"
                     >
-                        {/* Spotlight Gradient */}
-                        <div
-                            className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
-                            style={{
-                                background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%)`
-                            }}
-                        />
+                        {/* Period - Right Border only on desktop */}
+                        <div className="py-8 md:py-16 md:pr-12 md:border-r border-zinc-200 dark:border-zinc-800">
+                            <span className="font-mono text-sm text-zinc-500 dark:text-zinc-500 sticky top-32 block font-medium">
+                                {edu.period}
+                            </span>
+                        </div>
 
-                        <div className="relative p-8 md:p-10 h-full flex flex-col items-start text-left">
-                            {/* University Header */}
-                            <div className="mb-6 w-full">
-                                <div className="flex justify-between items-start mb-2">
-                                    <h3 className="text-3xl font-serif text-white tracking-wide">{edu.university}</h3>
-                                    <span className="inline-flex items-center px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-full text-xs font-bold text-zinc-400 uppercase tracking-wider">
-                                        {edu.period}
-                                    </span>
+                        {/* Content */}
+                        <div className="py-8 md:py-16 md:pl-12">
+                            <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-4 mb-8">
+                                <div>
+                                    <h3 className="font-serif text-3xl md:text-5xl text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-zinc-300 transition-colors">
+                                        {edu.university}
+                                    </h3>
+                                    <p className="font-mono text-zinc-500 text-sm tracking-wide">
+                                        {edu.location?.toUpperCase()}
+                                    </p>
                                 </div>
-                                <p className="text-zinc-500 font-mono text-sm">{edu.location || "USA"}</p>
+                                <div className="text-right self-start md:self-auto">
+                                    <p className="text-zinc-900 dark:text-white text-lg font-medium">{edu.degree}</p>
+                                    {edu.gpa && (
+                                        <p className="text-zinc-500 text-sm font-mono mt-1">GPA: {edu.gpa}</p>
+                                    )}
+                                </div>
                             </div>
 
-                            {/* Degree Info */}
-                            <div className="mb-8">
-                                <h4 className="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">{edu.degree}</h4>
-                                {edu.specialization && <p className="text-zinc-400 text-sm font-medium">{edu.specialization}</p>}
-                                {edu.gpa && (
-                                    <div className="mt-4 inline-flex items-center bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-md">
-                                        <span className="text-blue-400 text-sm font-bold tracking-tight">GPA {edu.gpa}</span>
+                            {/* Details Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-[1fr_200px] gap-8">
+                                <div>
+                                    <p className="text-xs font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-widest mb-4">Focus Areas</p>
+                                    <div className="flex flex-wrap gap-x-6 gap-y-2">
+                                        {edu.courses.map((course) => (
+                                            <span key={course} className="text-sm text-zinc-600 dark:text-zinc-400 font-light hover:text-blue-600 dark:hover:text-white transition-colors cursor-default">
+                                                {course}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {edu.projects && (
+                                    <div className="md:border-l border-zinc-200 dark:border-zinc-900 md:pl-8">
+                                        <p className="text-xs font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-widest mb-4">Capstone</p>
+                                        <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                                            {edu.projects}
+                                        </p>
                                     </div>
                                 )}
-                            </div>
-
-                            {/* Coursework Cluster */}
-                            <div className="mt-auto pt-8 border-t border-white/5 w-full">
-                                <h5 className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em] mb-4">Core Competencies</h5>
-                                <div className="flex flex-wrap gap-2">
-                                    {edu.courses.map((course) => (
-                                        <span key={course} className="text-xs px-2.5 py-1 rounded bg-zinc-900 text-zinc-400 border border-zinc-800 transition-all group-hover:border-zinc-700">
-                                            {course}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Capstone Link-style */}
-                            <div className="mt-6 w-full p-4 rounded-xl bg-zinc-900/50 border border-white/5 flex items-start gap-3">
-                                <div className="mt-1 w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
-                                <div>
-                                    <span className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Capstone</span>
-                                    <span className="text-sm text-zinc-200 leading-snug">{edu.projects}</span>
-                                </div>
                             </div>
                         </div>
                     </motion.div>
