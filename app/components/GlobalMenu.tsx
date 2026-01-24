@@ -37,7 +37,7 @@ const menuItems: { category: string; items: MenuItem[] }[] = [
     {
         category: "Connect",
         items: [
-            { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin, description: 'Professional network', external: true },
+            { name: 'LinkedIn', href: 'https://www.linkedin.com/in/naveen-saragadam/', icon: Linkedin, description: 'Professional network', external: true },
             { name: 'GitHub', href: 'https://github.com', icon: Github, description: 'Code repositories', external: true },
             { name: 'Twitter', href: 'https://twitter.com', icon: Twitter, description: 'Thoughts & updates', external: true },
         ]
@@ -128,6 +128,7 @@ export default function GlobalMenu() {
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
                                     className="flex-1 bg-transparent text-lg text-white placeholder-white/20 outline-none"
+                                    aria-label="Search menu items"
                                 />
                                 <div className="flex items-center gap-2">
                                     <span className="hidden md:flex items-center gap-1 px-2 py-1 rounded bg-white/5 border border-white/10 text-xs text-white/40 font-mono">
@@ -136,6 +137,7 @@ export default function GlobalMenu() {
                                     <button
                                         onClick={() => setIsOpen(false)}
                                         className="p-1 hover:bg-white/10 rounded-md transition-colors"
+                                        aria-label="Close Menu"
                                     >
                                         <X className="w-5 h-5 text-white/40" />
                                     </button>
