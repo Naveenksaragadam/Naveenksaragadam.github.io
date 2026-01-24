@@ -4,20 +4,32 @@ import NewHero from "../components/experience/NewHero"
 import Timeline from "../components/experience/Timeline"
 import ContributionGraph from "../components/experience/ContributionGraph"
 import BentoGrid from "../components/experience/BentoGrid"
+import SectionSeparator from "../components/SectionSeparator"
 import Navbar from "../components/Navbar"
 
 export default function ExperiencePage() {
     return (
-        <main className="min-h-screen bg-white dark:bg-[#050505] text-zinc-900 dark:text-white selection:bg-purple-500/30 transition-colors duration-300">
+        <main className="min-h-screen text-zinc-900 dark:text-white selection:bg-purple-500/30">
             {/* Navigation */}
             <Navbar />
 
             {/* Main Content */}
             <NewHero />
+
+            <SectionSeparator />
+
             <Timeline />
+
+            <SectionSeparator />
+
             <ContributionGraph />
+
+            <SectionSeparator />
+
             <BentoGrid />
 
+            {/* Bottom Spacing */}
+            <div className="h-32" />
         </main>
     )
 }

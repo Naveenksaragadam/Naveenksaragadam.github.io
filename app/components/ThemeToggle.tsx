@@ -18,10 +18,10 @@ export default function ThemeToggle() {
     return (
         <button
             onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-full text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors active:scale-95"
             aria-label="Toggle Theme"
         >
-            {resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            {resolvedTheme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
         </button>
     )
 }

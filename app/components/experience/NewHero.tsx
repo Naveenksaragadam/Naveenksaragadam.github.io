@@ -79,12 +79,7 @@ export default function NewHero() {
     return (
         <section className="relative min-h-screen w-full flex items-center justify-center py-32 px-6 md:px-12 overflow-hidden bg-transparent">
 
-            {/* Ambient Background Glows - Adjusted for Light Mode */}
-            <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-purple-200/40 dark:bg-purple-900/10 rounded-full blur-[120px] pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] bg-blue-200/40 dark:bg-blue-900/10 rounded-full blur-[100px] pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
-
-            {/* Subtle Grid Texture */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+            {/* Background elements removed to use GlobalBackground */}
 
             <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center z-10">
 

@@ -28,7 +28,16 @@ const projects = [
 
 export default function Projects() {
     return (
-        <section id="work" className="relative z-10 w-full bg-white dark:bg-[#121212] py-32 px-4 md:px-12 transition-colors duration-500">
+        <section id="work" className="relative z-10 w-full py-32 px-4 md:px-12 transition-colors duration-500 overflow-hidden">
+
+            {/* Local Background for Home Page Consistency (Matches Global) */}
+            <div className="absolute inset-0 z-[-1] pointer-events-none">
+                <div className="absolute inset-0 bg-white dark:bg-[#050505] transition-colors duration-500" />
+                <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-purple-200/40 dark:bg-purple-900/10 rounded-full blur-[120px] pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
+                <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] bg-blue-200/40 dark:bg-blue-900/10 rounded-full blur-[100px] pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+            </div>
+
             <div className="max-w-7xl mx-auto">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}

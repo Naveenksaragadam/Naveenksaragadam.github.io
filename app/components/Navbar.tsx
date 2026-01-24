@@ -43,7 +43,7 @@ export default function Navbar() {
 
                 <motion.div
                     layout
-                    className="relative flex items-center gap-1.5 bg-white/70 dark:bg-[#121212]/50 backdrop-blur-2xl border border-zinc-200 dark:border-white/[0.08] p-2 rounded-full shadow-lg dark:shadow-black/50 pointer-events-auto overflow-hidden ring-1 ring-zinc-900/5 dark:ring-white/5 transition-colors duration-300"
+                    className="relative flex items-center gap-1 bg-white/70 dark:bg-[#121212]/50 backdrop-blur-2xl border border-zinc-200 dark:border-white/[0.08] p-1.5 rounded-full shadow-lg dark:shadow-black/50 pointer-events-auto overflow-hidden ring-1 ring-zinc-900/5 dark:ring-white/5 transition-colors duration-300"
                 >
                     {navItems.map((item) => {
                         const isActive = activeTab === item.id
@@ -53,7 +53,7 @@ export default function Navbar() {
                                 href={item.href}
                                 onClick={() => setActiveTab(item.id)}
                                 className={`
-                                    relative px-6 py-2.5 rounded-full text-base font-medium transition-all duration-300
+                                    relative px-10 py-2 rounded-full text-[15px] font-semibold transition-all duration-300
                                     ${isActive
                                         ? 'text-zinc-900 dark:text-white shadow-sm'
                                         : 'text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5'}
