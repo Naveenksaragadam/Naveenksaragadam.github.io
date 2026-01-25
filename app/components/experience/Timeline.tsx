@@ -97,7 +97,7 @@ export default function Timeline() {
                     <div /> {/* Left Cols */}
                     <div className="hidden md:flex flex-col items-center relative w-full">
                         {/* Static Background Track - Constrained to match mask/bead radius */}
-                        <div className="absolute top-7 bottom-7 w-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full" />
+                        <div className="absolute top-7 bottom-7 w-1.5 bg-zinc-300 dark:bg-zinc-800 rounded-full" />
 
                         {/* MASKED GRADIENT REVEAL */}
                         <div className="absolute top-7 bottom-7 w-1.5 rounded-full overflow-hidden">
@@ -113,8 +113,8 @@ export default function Timeline() {
                         <div className="sticky top-1/2 -translate-y-1/2 z-50">
                             <div className="relative w-14 h-14 rounded-full border-2 border-zinc-200 dark:border-white/10 bg-white dark:bg-[#050505] shadow-[0_0_30px_rgba(59,130,246,0.3)] flex items-center justify-center">
                                 <div className="absolute inset-0 rounded-full bg-blue-500/10 dark:bg-blue-500/5 animate-pulse" />
-                                <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-zinc-900/5 dark:bg-transparent flex items-center justify-center p-0.5">
-                                    <Image src="/logo.png" alt="NS" fill className="object-contain dark:invert-0" />
+                                <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-zinc-900/10 dark:bg-transparent flex items-center justify-center p-0.5">
+                                    <Image src="/logo.png" alt="NS" fill className="object-contain invert dark:invert-0 transition-all duration-300" />
                                 </div>
                             </div>
                         </div>
