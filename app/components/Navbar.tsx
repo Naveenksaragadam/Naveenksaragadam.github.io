@@ -20,16 +20,20 @@ export default function Navbar() {
 
     // Handle scroll and initial active tab
     React.useEffect(() => {
-        // Track if we are on the animated parts of the home page
-        const unsubscribe = scrollY.on('change', (latest) => {
+        const checkScroll = (latest: number) => {
             if (pathname === '/') {
-                // Threshold matches the 500vh Overlay height
                 const viewportHeight = window.innerHeight
                 setIsHomeAnimated(latest < viewportHeight * 4.5)
             } else {
                 setIsHomeAnimated(false)
             }
-        })
+        }
+
+        // Check initial state
+        checkScroll(scrollY.get())
+
+        // Track changes
+        const unsubscribe = scrollY.on('change', checkScroll)
 
         // simple pathname check for active tab
         if (pathname === '/work') setActiveTab('work')
