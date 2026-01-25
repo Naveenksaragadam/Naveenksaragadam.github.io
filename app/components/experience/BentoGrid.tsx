@@ -5,7 +5,7 @@ import { Code2, Database, Box, Terminal, ArrowRight, Play, AudioWaveform } from 
 
 export default function BentoGrid() {
     return (
-        <section className="max-w-7xl mx-auto px-6 pb-40">
+        <section className="max-w-[1400px] mx-auto px-6 md:px-12 pb-40">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                 {/* Card 1: My Stack */}

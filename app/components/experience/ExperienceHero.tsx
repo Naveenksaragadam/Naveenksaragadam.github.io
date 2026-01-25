@@ -11,9 +11,9 @@ export default function ExperienceHero() {
     ]
 
     return (
-        <section className="relative min-h-[90vh] flex flex-col md:flex-row items-center justify-center pt-32 px-6 md:px-12 gap-12 overflow-hidden">
+        <section className="relative min-h-[90vh] max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-center pt-32 px-6 md:px-12 gap-12 overflow-hidden">
             {/* Background Gradient Mesh */}
-            <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-purple-900/20 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-purple-200/40 dark:bg-purple-900/20 blur-[120px] rounded-full pointer-events-none" />
 
             {/* Left Content */}
             <div className="w-full md:w-1/2 space-y-6 z-10">

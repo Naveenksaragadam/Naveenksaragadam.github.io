@@ -8,7 +8,13 @@ export default function ContributionGraph() {
     // Generate mock data for the graph
     const weeks = 52
     const days = 7
-    const contributionLevels = ['bg-[#161b22]', 'bg-[#0e4429]', 'bg-[#006d32]', 'bg-[#26a641]', 'bg-[#39d353]']
+    const contributionLevels = [
+        'bg-zinc-100 dark:bg-[#161b22]',
+        'bg-emerald-100 dark:bg-[#0e4429]',
+        'bg-emerald-300 dark:bg-[#006d32]',
+        'bg-emerald-500 dark:bg-[#26a641]',
+        'bg-emerald-600 dark:bg-[#39d353]'
+    ]
 
     // Deterministic random for consistent render
     const getLevel = (i: number) => {
@@ -22,7 +28,7 @@ export default function ContributionGraph() {
     }
 
     return (
-        <section className="max-w-7xl mx-auto px-6 py-20">
+        <section className="max-w-[1400px] mx-auto px-6 md:px-12 py-20">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

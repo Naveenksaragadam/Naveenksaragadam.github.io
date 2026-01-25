@@ -81,7 +81,7 @@ export default function NewHero() {
 
             {/* Background elements removed to use GlobalBackground */}
 
-            <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center z-10">
+            <div className="max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center z-10">
 
                 {/* Left Column: Content */}
                 <motion.div
@@ -152,7 +152,7 @@ export default function NewHero() {
                             key={card.id}
                             animate={getCardVariant(index)}
                             transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
-                            className="absolute top-0 w-[240px] h-[320px] md:w-[260px] md:h-[360px] bg-zinc-900 rounded-[24px] overflow-hidden border border-white/10 shadow-2xl origin-center transform-style-3d cursor-pointer"
+                            className="absolute top-0 w-[240px] h-[320px] md:w-[260px] md:h-[360px] bg-white dark:bg-zinc-900 rounded-[24px] overflow-hidden border border-zinc-200 dark:border-white/10 shadow-2xl origin-center transform-style-3d cursor-pointer"
                             onClick={() => setActiveIndex(index)}
                         >
                             {/* Gradient/Image */}
