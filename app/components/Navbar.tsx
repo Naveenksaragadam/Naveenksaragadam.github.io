@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
@@ -15,20 +15,32 @@ const navItems = [
 export default function Navbar() {
     const pathname = usePathname()
     const [activeTab, setActiveTab] = React.useState('home')
-    const [isScrolled, setIsScrolled] = React.useState(false)
+    const { scrollY } = useScroll()
+    const [isHomeAnimated, setIsHomeAnimated] = React.useState(false)
 
     // Handle scroll and initial active tab
     React.useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 100)
-        window.addEventListener('scroll', handleScroll)
+        // Track if we are on the animated parts of the home page
+        const unsubscribe = scrollY.on('change', (latest) => {
+            if (pathname === '/') {
+                // Threshold matches the 500vh Overlay height
+                const viewportHeight = window.innerHeight
+                setIsHomeAnimated(latest < viewportHeight * 4.5)
+            } else {
+                setIsHomeAnimated(false)
+            }
+        })
 
         // simple pathname check for active tab
         if (pathname === '/work') setActiveTab('work')
         else if (pathname === '/experience') setActiveTab('experience')
         else setActiveTab('home')
 
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [pathname])
+        return () => unsubscribe()
+    }, [pathname, scrollY])
+
+    // Force dark mode styles if on animated home sections
+    const forceDark = pathname === '/' && isHomeAnimated
 
     return (
         <motion.nav
@@ -39,11 +51,16 @@ export default function Navbar() {
         >
             <div className="relative flex items-center gap-4">
                 {/* Top Glow/Reflection Effect */}
-                <div className="absolute -top-px left-1/2 -translate-x-1/2 w-12 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent blur-[2px] z-20" />
+                <div className={`absolute -top-px left-1/2 -translate-x-1/2 w-12 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent blur-[2px] z-20 ${forceDark ? 'opacity-100' : 'opacity-0 dark:opacity-100'} transition-opacity duration-300`} />
 
                 <motion.div
                     layout
-                    className="relative flex items-center gap-1 bg-white/70 dark:bg-[#121212]/50 backdrop-blur-2xl border border-zinc-200 dark:border-white/[0.08] p-1.5 rounded-full shadow-lg dark:shadow-black/50 pointer-events-auto overflow-hidden ring-1 ring-zinc-900/5 dark:ring-white/5 transition-colors duration-300"
+                    className={`
+                        relative flex items-center gap-1 backdrop-blur-2xl border p-1.5 rounded-full shadow-lg pointer-events-auto overflow-hidden ring-1 transition-all duration-500
+                        ${forceDark
+                            ? 'bg-[#121212]/50 border-white/[0.08] shadow-black/50 ring-white/5'
+                            : 'bg-white/70 dark:bg-[#121212]/50 border-zinc-200 dark:border-white/[0.08] dark:shadow-black/50 ring-zinc-900/5 dark:ring-white/5'}
+                    `}
                 >
                     {navItems.map((item) => {
                         const isActive = activeTab === item.id
@@ -55,14 +72,14 @@ export default function Navbar() {
                                 className={`
                                     relative px-8 py-2 rounded-full text-[15px] font-semibold transition-all duration-300
                                     ${isActive
-                                        ? 'text-zinc-900 dark:text-white shadow-sm'
-                                        : 'text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5'}
+                                        ? (forceDark ? 'text-white' : 'text-zinc-900 dark:text-white')
+                                        : (forceDark ? 'text-white/60 hover:text-white hover:bg-white/5' : 'text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5')}
                                 `}
                             >
                                 {isActive && (
                                     <motion.div
                                         layoutId="active-pill"
-                                        className="absolute inset-0 bg-white shadow-sm ring-1 ring-zinc-200 dark:bg-white/[0.1] rounded-full dark:ring-white/[0.05]"
+                                        className={`absolute inset-0 shadow-sm ring-1 rounded-full transition-colors duration-500 ${forceDark ? 'bg-white/[0.1] ring-white/[0.05]' : 'bg-white ring-zinc-200 dark:bg-white/[0.1] dark:ring-white/[0.05]'}`}
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
@@ -73,7 +90,7 @@ export default function Navbar() {
 
                     {/* Theme Toggle - Integrated seamlessly */}
                     <div className="flex items-center px-4 pr-1">
-                        <ThemeToggle />
+                        <ThemeToggle forceDark={forceDark} />
                     </div>
                 </motion.div>
             </div>
