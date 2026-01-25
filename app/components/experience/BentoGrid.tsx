@@ -19,20 +19,20 @@ export default function BentoGrid() {
                     <h3 className="text-sm font-mono text-zinc-500 uppercase tracking-widest mb-8">Uses</h3>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="flex flex-col items-center gap-2 p-4 bg-white/50 dark:bg-white/5 rounded-2xl group-hover:bg-white/80 dark:group-hover:bg-white/10 transition-colors">
-                            <Code2 className="w-8 h-8 text-blue-500 dark:text-blue-400" />
+                        <div className="flex flex-col items-center gap-2 p-4 bg-white/50 dark:bg-white/5 rounded-2xl group-hover:bg-white/80 dark:group-hover:bg-white/10 transition-colors group">
+                            <img src="https://cdn.simpleicons.org/visualstudiocode" alt="VS Code" className="w-8 h-8 dark:invert dark:opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
                             <span className="text-xs text-zinc-600 dark:text-zinc-400">VS Code</span>
                         </div>
-                        <div className="flex flex-col items-center gap-2 p-4 bg-white/50 dark:bg-white/5 rounded-2xl group-hover:bg-white/80 dark:group-hover:bg-white/10 transition-colors">
-                            <Box className="w-8 h-8 text-orange-500 dark:text-orange-400" />
+                        <div className="flex flex-col items-center gap-2 p-4 bg-white/50 dark:bg-white/5 rounded-2xl group-hover:bg-white/80 dark:group-hover:bg-white/10 transition-colors group">
+                            <img src="https://cdn.simpleicons.org/dbt" alt="dbt" className="w-8 h-8 dark:invert dark:opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
                             <span className="text-xs text-zinc-600 dark:text-zinc-400">dbt</span>
                         </div>
-                        <div className="flex flex-col items-center gap-2 p-4 bg-white/50 dark:bg-white/5 rounded-2xl group-hover:bg-white/80 dark:group-hover:bg-white/10 transition-colors">
-                            <Terminal className="w-8 h-8 text-zinc-900 dark:text-white" />
+                        <div className="flex flex-col items-center gap-2 p-4 bg-white/50 dark:bg-white/5 rounded-2xl group-hover:bg-white/80 dark:group-hover:bg-white/10 transition-colors group">
+                            <img src="https://cdn.simpleicons.org/gnubash" alt="Shell" className="w-8 h-8 dark:invert dark:opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
                             <span className="text-xs text-zinc-600 dark:text-zinc-400">Shell</span>
                         </div>
-                        <div className="flex flex-col items-center gap-2 p-4 bg-white/50 dark:bg-white/5 rounded-2xl group-hover:bg-white/80 dark:group-hover:bg-white/10 transition-colors">
-                            <Database className="w-8 h-8 text-red-500" />
+                        <div className="flex flex-col items-center gap-2 p-4 bg-white/50 dark:bg-white/5 rounded-2xl group-hover:bg-white/80 dark:group-hover:bg-white/10 transition-colors group">
+                            <img src="https://cdn.simpleicons.org/minio" alt="MinIO" className="w-8 h-8 dark:invert dark:opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
                             <span className="text-xs text-zinc-600 dark:text-zinc-400">MinIO</span>
                         </div>
                     </div>

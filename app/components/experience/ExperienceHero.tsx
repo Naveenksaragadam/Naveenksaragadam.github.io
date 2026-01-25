@@ -5,9 +5,9 @@ import { Server, Wind, Database } from 'lucide-react'
 
 export default function ExperienceHero() {
     const cards = [
-        { name: 'ClickHouse', icon: Database, color: 'bg-yellow-500', rotate: 6, z: 10 },
-        { name: 'Airflow', icon: Wind, color: 'bg-blue-500', rotate: -3, z: 20 },
-        { name: 'Apache Spark', icon: Server, color: 'bg-orange-500', rotate: 12, z: 30 },
+        { name: 'ClickHouse', slug: 'clickhouse', color: 'FDC010', rotate: 6, z: 10 },
+        { name: 'Airflow', slug: 'apacheairflow', color: '017CEE', rotate: -3, z: 20 },
+        { name: 'Apache Spark', slug: 'apachespark', color: 'E25A1C', rotate: 12, z: 30 },
     ]
 
     return (
@@ -67,8 +67,12 @@ export default function ExperienceHero() {
                             style={{ zIndex: card.z }}
                             className="absolute inset-0 rounded-2xl border border-zinc-200 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-xl shadow-2xl flex flex-col items-center justify-center gap-3 group transition-colors duration-300"
                         >
-                            <div className={`p-4 rounded-xl ${card.color}/10 border border-${card.color.split('-')[1]}-500/20 group-hover:bg-${card.color.split('-')[1]}-500/20 transition-colors`}>
-                                <card.icon className={`w-10 h-10 text-${card.color.split('-')[1]}-500 dark:text-${card.color.split('-')[1]}-400`} />
+                            <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 group-hover:border-blue-500/30 transition-all duration-300">
+                                <img
+                                    src={`https://cdn.simpleicons.org/${card.slug}/${card.color}`}
+                                    alt={card.name}
+                                    className="w-10 h-10 object-contain shadow-sm"
+                                />
                             </div>
                             <span className="font-mono text-sm text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
                                 {card.name}

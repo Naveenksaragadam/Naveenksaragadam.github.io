@@ -11,15 +11,16 @@ const education = [
         university: "University of Arizona",
         location: "Tucson, AZ",
         period: "2023 - 2025",
+        logo: "/images/arizona-logo.png",
         gpa: "3.8/4.00",
         courses: [
-            "Foundations of Information",
-            "Data mining and Discovery",
-            "Intro to Machine Learning",
-            "Data Warehousing and Analytics in Cloud",
-            "NLP",
-            "Neural Networks",
-            "Data Analysis and Visualization"
+            { name: "Foundations of Information", slug: "googlescholar", color: "4285F4" },
+            { name: "Data mining and Discovery", slug: "databricks", color: "FF3621" },
+            { name: "Intro to Machine Learning", slug: "scikitlearn", color: "F7931E" },
+            { name: "Data Warehousing and Analytics in Cloud", slug: "snowflake", color: "29B5E8" },
+            { name: "NLP", slug: "python", color: "3776AB" },
+            { name: "Neural Networks", slug: "pytorch", color: "EE4C2C" },
+            { name: "Data Analysis and Visualization", slug: "tableau", color: "E97627" }
         ],
         projects: "End to End F1 analytics Dashboard via Azure"
     },
@@ -29,20 +30,21 @@ const education = [
         university: "Bharath University",
         location: "Chennai, India",
         period: "2017 - 2021",
+        logo: "/images/bharath-logo.jpg",
         gpa: null,
         courses: [
-            "Fundamentals of Computing and Programming",
-            "Data Structures and Algorithms",
-            "Database Management Systems",
-            "OS",
-            "Networking",
-            "Software Engineering",
-            "Intro to Data Science",
-            "Data Warehousing and Mining",
-            "Distributed Computing",
-            "Big Data Analytics",
-            "AI and Expert systems",
-            "Computer Vision"
+            { name: "Fundamentals of Computing and Programming", slug: "cplusplus", color: "00599C" },
+            { name: "Data Structures and Algorithms", slug: "java", color: "007396" },
+            { name: "Database Management Systems", slug: "mysql", color: "4479A1" },
+            { name: "OS", slug: "linux", color: "FCC624" },
+            { name: "Networking", slug: "cisco", color: "1BA0D7" },
+            { name: "Software Engineering", slug: "git", color: "F05032" },
+            { name: "Intro to Data Science", slug: "anaconda", color: "44A833" },
+            { name: "Data Warehousing and Mining", slug: "oracle", color: "F80000" },
+            { name: "Distributed Computing", slug: "apache", color: "D22128" },
+            { name: "Big Data Analytics", slug: "apachespark", color: "E25A1C" },
+            { name: "AI and Expert systems", slug: "openai", color: "412991" },
+            { name: "Computer Vision", slug: "opencv", color: "5C3EE8" }
         ],
         projects: "CNN based Emotion Recognition model"
     }
@@ -59,14 +61,18 @@ export default function Education() {
 
     return (
         <section className="relative w-full max-w-[1400px] mx-auto px-6 md:pl-12 md:pr-10 py-32">
-            <motion.h2
+            {/* Header */}
+            <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="text-center font-serif text-5xl md:text-8xl text-zinc-900 dark:text-white mb-40 tracking-tight"
+                className="flex flex-col items-center mb-40"
             >
-                Educational Journey
-            </motion.h2>
+                <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-2">Educational Journey</div>
+                <h2 className="text-4xl md:text-7xl font-serif font-bold text-zinc-900 dark:text-white text-center tracking-tight">
+                    Degrees & <span className="bg-gradient-to-r from-purple-500 to-fuchsia-500 bg-clip-text text-transparent">Learning</span>
+                </h2>
+            </motion.div>
 
             <div ref={containerRef} className="relative">
                 {/* 
@@ -119,8 +125,12 @@ export default function Education() {
                                     <h3 className="text-2xl md:text-3xl font-serif text-zinc-900 dark:text-white leading-tight">
                                         {edu.university}
                                     </h3>
-                                    <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-100 font-bold text-lg shrink-0 overflow-hidden shadow-sm">
-                                        {edu.university.charAt(0)}
+                                    <div className="w-14 h-14 rounded-xl bg-white dark:bg-zinc-100 border border-zinc-200 dark:border-zinc-200 flex items-center justify-center shrink-0 overflow-hidden shadow-sm p-2">
+                                        <img
+                                            src={edu.logo}
+                                            alt={edu.university}
+                                            className="w-12 h-12 object-contain"
+                                        />
                                     </div>
                                 </div>
                                 <div className="flex md:justify-end gap-2 mt-4 text-zinc-500 text-[11px] font-medium uppercase tracking-wide">
@@ -145,7 +155,10 @@ export default function Education() {
                                     )}
                                 </div>
 
-                                <div className="space-y-8 bg-zinc-50/50 dark:bg-white/[0.02] border border-zinc-200 dark:border-white/5 rounded-3xl p-8 md:p-10 max-w-3xl shadow-sm backdrop-blur-sm">
+                                <motion.div
+                                    whileHover={{ scale: 1.01 }}
+                                    className="space-y-8 bg-white dark:bg-[#0d1117] border border-zinc-200 dark:border-white/10 rounded-3xl p-8 md:p-10 max-w-3xl shadow-2xl backdrop-blur-sm transition-colors duration-300"
+                                >
                                     {edu.projects && (
                                         <div>
                                             <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-2 leading-none">Capstone</p>
@@ -155,17 +168,20 @@ export default function Education() {
                                         </div>
                                     )}
 
-                                    <div className="flex flex-wrap gap-2 pt-2">
+                                    <div className="flex flex-wrap gap-2 pt-6 border-t border-zinc-100 dark:border-white/5">
+                                        <p className="w-full text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1 leading-none">Coursework</p>
                                         {edu.courses.map((course) => (
-                                            <span key={course} className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all duration-300 cursor-default">
-                                                <svg className="w-3 h-3 opacity-40 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                                </svg>
-                                                <span className="truncate">{course}</span>
+                                            <span key={course.name} className="flex items-center gap-2.5 px-4 py-2 bg-white dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl text-[11px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-300 hover:border-purple-500/30 hover:bg-zinc-50 dark:hover:bg-purple-500/5 transition-all duration-300 cursor-default">
+                                                <img
+                                                    src={`https://cdn.simpleicons.org/${course.slug}/${course.color}`}
+                                                    alt={course.name}
+                                                    className="w-4 h-4 shadow-sm object-contain"
+                                                />
+                                                <span className="truncate">{course.name}</span>
                                             </span>
                                         ))}
                                     </div>
-                                </div>
+                                </motion.div>
                             </div>
                         </motion.div>
                     ))}

@@ -10,6 +10,9 @@ const experiences = [
         location: "Bangalore, India",
         role: "Data Analyst (Data Engineering Focus)",
         period: "Apr 2023 – Jun 2024",
+        logo: "https://www.vectorlogo.zone/logos/target/target-icon.svg",
+        logoScale: "scale-110",
+        logoPadding: "py-2",
         description: "Migrated legacy Hadoop/Hive pricing pipelines to PySpark on-premise clusters, reducing runtime 30% (8h → 5.5h) for $7.5B North America clearance dataset. Maintained 99.9% SLA across critical pipelines.",
         achievements: [
             "Refactored inefficient joins and implemented partitioning strategies on terabyte-scale weekly snapshots, enabling same-day pricing analysis for 230+ stakeholders.",
@@ -19,13 +22,26 @@ const experiences = [
             "Optimized SQL queries for 5+ high-traffic Greenfield dashboards (Apache Druid), reducing data retrieval latency 40%.",
             "Restructured complex subqueries as CTEs and added strategic indexing, enabling real-time pricing analysis."
         ],
-        tech: ["PySpark", "Hadoop", "Hive", "Python", "Pydantic", "Apache Druid", "SQL", "Airflow"]
+        tech: [
+            { name: "PySpark", slug: "apachespark", color: "E25A1C" },
+            { name: "Hadoop", slug: "apachehadoop", color: "66CCFF" },
+            { name: "Hive", slug: "apachehive", color: "FDE073" },
+            { name: "Python", slug: "python", color: "3776AB" },
+            { name: "Pydantic", slug: "pydantic", color: "E92063" },
+            { name: "Apache Druid", slug: "apachedruid", color: "29FCC3" },
+            { name: "SQL", slug: "postgresql", color: "4169E1" },
+            { name: "Airflow", slug: "apacheairflow", color: "017CEE" }
+        ]
     },
     {
         company: "EXL Service",
         location: "Noida, India",
         role: "Business Analyst (Data Engineering)",
         period: "Nov 2021 – Apr 2023",
+        logo: "/images/exl-logo-v2.png",
+        logoScale: "scale-[1.5]",
+        logoPadding: "px-1.5 py-2",
+        logoBoxStyle: "!w-14 !h-14 !min-w-0 p-2 mb-1",
         description: "Built end-to-end ELT pipelines using Apache Oozie and SparkSQL, consolidating 5 disparate supply chain data sources into a unified warehouse for General Motors / ACDelco.",
         achievements: [
             "Ingested 80GB weekly supply chain data during critical chip shortage, enabling inventory optimization for dealer networks.",
@@ -35,7 +51,16 @@ const experiences = [
             "Integrated SharePoint data sources using Shareplum to maintain centralized parts availability data.",
             "Solved critical tech debt issue where unused tables were being dropped, preventing downstream reporting failures."
         ],
-        tech: ["Apache Oozie", "SparkSQL", "Python", "Selenium", "BeautifulSoup", "Shareplum", "Excel", "HQL"]
+        tech: [
+            { name: "Apache Oozie", slug: "apache", color: "D22128" },
+            { name: "SparkSQL", slug: "apachespark", color: "E25A1C" },
+            { name: "Python", slug: "python", color: "3776AB" },
+            { name: "Selenium", slug: "selenium", color: "43B02A" },
+            { name: "BeautifulSoup", slug: "python", color: "3776AB" },
+            { name: "Shareplum", slug: "microsoftsharepoint", color: "0078D4" },
+            { name: "Excel", slug: "microsoftexcel", color: "217346" },
+            { name: "HQL", slug: "apachehive", color: "FDE073" }
+        ]
     }
 ]
 
@@ -52,14 +77,17 @@ export default function Timeline() {
         <section className="relative w-full max-w-[1400px] mx-auto px-6 md:pl-12 md:pr-4 py-32">
 
             {/* Header */}
-            <motion.h2
+            <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="text-center font-serif text-5xl md:text-8xl text-zinc-900 dark:text-white mb-40 tracking-tight"
+                className="flex flex-col items-center mb-40"
             >
-                Professional Journey
-            </motion.h2>
+                <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-2">Professional Journey</div>
+                <h2 className="text-4xl md:text-7xl font-serif font-bold text-zinc-900 dark:text-white text-center tracking-tight">
+                    Work & <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">Experience</span>
+                </h2>
+            </motion.div>
 
             <div ref={containerRef} className="relative">
                 {/* 
@@ -112,8 +140,12 @@ export default function Timeline() {
                                     <h3 className="text-2xl md:text-3xl font-serif text-zinc-900 dark:text-white leading-tight">
                                         {exp.company}
                                     </h3>
-                                    <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-100 font-bold text-lg shrink-0 overflow-hidden shadow-sm">
-                                        {exp.company.charAt(0)}
+                                    <div className={`rounded-xl bg-white dark:bg-zinc-100 border border-zinc-200 dark:border-zinc-200 flex items-center justify-center shrink-0 overflow-hidden shadow-sm ${exp.logoBoxStyle || 'h-14 w-auto min-w-[3.5rem] px-3'}`}>
+                                        <img
+                                            src={exp.logo}
+                                            alt={exp.company}
+                                            className={`h-full w-auto object-contain ${exp.logoPadding || 'py-2'} ${exp.logoScale || 'scale-100'}`}
+                                        />
                                     </div>
                                 </div>
                                 <div className="flex md:justify-end gap-2 mt-4 text-zinc-500 text-[11px] font-medium uppercase tracking-wide">
@@ -131,7 +163,10 @@ export default function Timeline() {
                                     {exp.role}
                                 </h4>
 
-                                <div className="space-y-8 bg-zinc-50/50 dark:bg-white/[0.02] border border-zinc-200 dark:border-white/5 rounded-3xl p-8 md:p-10 max-w-5xl shadow-sm backdrop-blur-sm">
+                                <motion.div
+                                    whileHover={{ scale: 1.01 }}
+                                    className="space-y-8 bg-white dark:bg-[#0d1117] border border-zinc-200 dark:border-white/10 rounded-3xl p-8 md:p-10 max-w-5xl shadow-2xl backdrop-blur-sm transition-colors duration-300"
+                                >
                                     <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed max-w-4xl text-justify">
                                         {exp.description}
                                     </p>
@@ -145,21 +180,25 @@ export default function Timeline() {
                                         ))}
                                     </ul>
 
-                                    <div className="flex flex-wrap gap-2 pt-4">
+                                    <div className="flex flex-wrap gap-2 pt-4 border-t border-zinc-100 dark:border-white/5">
                                         {exp.tech.map((t) => (
-                                            <span key={t} className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all duration-300 cursor-default">
-                                                <svg className="w-3 h-3 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-                                                {t}
+                                            <span key={t.name} className="flex items-center gap-2.5 px-4 py-2 bg-white dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl text-[11px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-300 hover:border-blue-500/30 hover:bg-zinc-50 dark:hover:bg-blue-500/5 transition-all duration-300 cursor-default">
+                                                <img
+                                                    src={`https://cdn.simpleicons.org/${t.slug}/${t.color}`}
+                                                    alt={t.name}
+                                                    className="w-4 h-4 object-contain shadow-sm"
+                                                />
+                                                {t.name}
                                             </span>
                                         ))}
                                     </div>
-                                </div>
+                                </motion.div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
-            </div>
-        </section>
+            </div >
+        </section >
 
     )
 }

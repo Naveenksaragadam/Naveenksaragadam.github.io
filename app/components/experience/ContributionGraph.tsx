@@ -1,13 +1,14 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Star, GitCommit, GitFork } from 'lucide-react'
+import { Github, Star, GitCommit, GitFork, Loader2, Library } from 'lucide-react'
 import CountUp from 'react-countup'
+import { useGitHub } from '../Providers'
 
 export default function ContributionGraph() {
-    // Generate mock data for the graph
-    const weeks = 52
-    const days = 7
+    const { stats, contributions, loading, error } = useGitHub()
+    const username = 'Naveenksaragadam'
+
     const contributionLevels = [
         'bg-zinc-100 dark:bg-[#161b22]',
         'bg-emerald-100 dark:bg-[#0e4429]',
@@ -16,15 +17,27 @@ export default function ContributionGraph() {
         'bg-emerald-600 dark:bg-[#39d353]'
     ]
 
-    // Deterministic random for consistent render
-    const getLevel = (i: number) => {
-        const x = Math.sin(i * 9999)
-        const rand = (x - Math.floor(x))
-        if (rand > 0.9) return 4
-        if (rand > 0.7) return 3
-        if (rand > 0.5) return 2
-        if (rand > 0.3) return 1
-        return 0
+    if (error) {
+        return (
+            <section className="max-w-[1400px] mx-auto px-6 md:px-12 py-20 text-center">
+                <div className="bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-12 shadow-2xl">
+                    <Github className="w-12 h-12 mx-auto mb-4 text-zinc-300 dark:text-zinc-700" />
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Contributions Unavailable</h3>
+                    <p className="text-zinc-500">Currently unable to fetch live data from GitHub. Please check back later.</p>
+                </div>
+            </section>
+        )
+    }
+
+    if (!loading && contributions.length === 0) {
+        return (
+            <section className="max-w-[1400px] mx-auto px-6 md:px-12 py-20 text-center">
+                <div className="bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-12 shadow-2xl">
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">No Contributions Found</h3>
+                    <p className="text-zinc-500">No public activity recorded for @{username} in the last year.</p>
+                </div>
+            </section>
+        )
     }
 
     return (
@@ -47,11 +60,17 @@ export default function ContributionGraph() {
                     whileInView={{ opacity: 1, x: 0 }}
                     className="lg:col-span-2 bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-8 shadow-2xl overflow-hidden relative transition-colors duration-300"
                 >
+                    {loading ? (
+                        <div className="absolute inset-0 flex items-center justify-center bg-white/50 dark:bg-[#0d1117]/50 backdrop-blur-sm z-10 rounded-3xl">
+                            <Loader2 className="w-8 h-8 text-emerald-500 animate-spin" />
+                        </div>
+                    ) : null}
+
                     <div className="absolute top-0 right-0 p-8 text-right">
                         <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
-                            <CountUp end={1807} duration={2} separator="," />
+                            <CountUp end={stats.totalContributions} duration={2} separator="," />
                         </div>
-                        <div className="text-xs text-zinc-500 uppercase tracking-wider">2025 Total</div>
+                        <div className="text-xs text-zinc-500 uppercase tracking-wider">Last Year Total</div>
                     </div>
 
                     <div className="flex items-center gap-4 mb-10">
@@ -59,26 +78,68 @@ export default function ContributionGraph() {
                             <Github className="w-6 h-6 text-zinc-900 dark:text-white" />
                         </div>
                         <div>
-                            <div className="text-zinc-900 dark:text-white font-bold">@Naveenksaragadam</div>
+                            <div className="text-zinc-900 dark:text-white font-bold">@{username}</div>
                             <div className="text-zinc-500 text-sm">Contribution Graph</div>
                         </div>
                     </div>
 
-                    {/* The Grid */}
-                    <div className="flex gap-1 overflow-x-auto pb-4 scrollbar-hide">
-                        {Array.from({ length: weeks }).map((_, w) => (
-                            <div key={w} className="flex flex-col gap-1">
-                                {Array.from({ length: days }).map((_, d) => (
-                                    <motion.div
-                                        key={d}
-                                        initial={{ opacity: 0, scale: 0 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: (w * 0.01) + (d * 0.01) }}
-                                        className={`w-3 h-3 rounded-sm ${contributionLevels[getLevel(w * 7 + d)]}`}
-                                    />
-                                ))}
-                            </div>
-                        ))}
+                    {/* The Grid Grouped by Quarters */}
+                    <div className="flex justify-start items-end gap-x-1 overflow-x-auto pb-4 scrollbar-hide min-h-[140px]">
+                        {(() => {
+                            const groupedQuarters: { label: string; weeks: any[][] }[] = [];
+
+                            if (loading) {
+                                // Dummy loading quarters
+                                for (let i = 0; i < 4; i++) {
+                                    groupedQuarters.push({
+                                        label: `Q${i + 1}`,
+                                        weeks: Array.from({ length: 13 }).map(() => Array.from({ length: 7 }).map(() => ({ level: 0, date: '' })))
+                                    });
+                                }
+                            } else {
+                                contributions.forEach(week => {
+                                    const firstDay = new Date(week[0].date);
+                                    const q = Math.floor(firstDay.getMonth() / 3) + 1;
+                                    const year = firstDay.getFullYear().toString().slice(-2);
+                                    const label = `Q${q}'${year}`;
+
+                                    if (groupedQuarters.length === 0 || groupedQuarters[groupedQuarters.length - 1].label !== label) {
+                                        groupedQuarters.push({ label, weeks: [week] });
+                                    } else {
+                                        groupedQuarters[groupedQuarters.length - 1].weeks.push(week);
+                                    }
+                                });
+                            }
+
+                            return groupedQuarters.map((quarter, qIndex) => (
+                                <div key={qIndex} className="flex items-end gap-x-1">
+                                    <div className="flex flex-col gap-3">
+                                        <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-600 uppercase tracking-widest text-center border-b border-zinc-100 dark:border-white/5 pb-1">
+                                            {quarter.label}
+                                        </div>
+                                        <div className="flex gap-1">
+                                            {quarter.weeks.map((week, w) => (
+                                                <div key={w} className="flex flex-col gap-1">
+                                                    {week.map((day: any, d) => (
+                                                        <motion.div
+                                                            key={`${qIndex}-${w}-${d}`}
+                                                            initial={{ opacity: 0, scale: 0 }}
+                                                            animate={{ opacity: loading ? 0.2 : 1, scale: 1 }}
+                                                            transition={{ delay: (qIndex * 0.1) + (w * 0.01) + (d * 0.005) }}
+                                                            className={`w-3 h-3 rounded-sm ${loading ? 'bg-zinc-200 dark:bg-zinc-800' : contributionLevels[day.level]}`}
+                                                            title={loading ? undefined : `${day.count} contributions on ${day.date}`}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    {qIndex < groupedQuarters.length - 1 && (
+                                        <div className="w-px h-12 bg-zinc-100 dark:bg-white/5 mb-1" />
+                                    )}
+                                </div>
+                            ));
+                        })()}
                     </div>
 
                     <div className="mt-4 flex items-center justify-end gap-2 text-xs text-zinc-500">
@@ -94,28 +155,18 @@ export default function ContributionGraph() {
 
                 {/* Stats Panel */}
                 <div className="space-y-4">
-                    {/* Followers */}
+                    {/* Repositories */}
                     <motion.div
                         whileHover={{ scale: 1.02 }}
                         className="bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-6 flex items-center justify-between transition-colors duration-300"
                     >
                         <div>
-                            <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Followers</div>
-                            <div className="text-4xl font-bold text-pink-500">
-                                <CountUp end={319} duration={2} />
+                            <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Repositories</div>
+                            <div className="text-4xl font-bold text-purple-500">
+                                <CountUp end={stats.publicRepos} duration={2} />
                             </div>
                         </div>
-                        {/* Abstract dots animation */}
-                        <div className="flex gap-1">
-                            {[1, 2, 3].map(i => (
-                                <motion.div
-                                    key={i}
-                                    animate={{ opacity: [0.3, 1, 0.3] }}
-                                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                                    className="w-2 h-2 rounded-full bg-pink-500/50"
-                                />
-                            ))}
-                        </div>
+                        <Library className="w-8 h-8 text-purple-500/50" />
                     </motion.div>
 
                     {/* Forks */}
@@ -126,10 +177,10 @@ export default function ContributionGraph() {
                         <div>
                             <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Forks</div>
                             <div className="text-4xl font-bold text-emerald-400">
-                                <CountUp end={74} duration={2} />
+                                <CountUp end={stats.forks} duration={2} />
                             </div>
                         </div>
-                        <GitFork className="w-8 h-8 text-emerald-500/20" />
+                        <GitFork className="w-8 h-8 text-emerald-500/50" />
                     </motion.div>
 
                     {/* Stars */}
@@ -140,10 +191,10 @@ export default function ContributionGraph() {
                         <div>
                             <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Stars</div>
                             <div className="text-4xl font-bold text-yellow-400">
-                                <CountUp end={505} duration={2} />
+                                <CountUp end={stats.stars} duration={2} />
                             </div>
                         </div>
-                        <Star className="w-8 h-8 text-yellow-500/20 fill-yellow-500/20" />
+                        <Star className="w-8 h-8 text-yellow-500/50 fill-yellow-500/30" />
                     </motion.div>
                 </div>
             </div>

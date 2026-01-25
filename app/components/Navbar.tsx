@@ -37,7 +37,7 @@ export default function Navbar() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="fixed top-6 left-1/2 z-50 pointer-events-none"
         >
-            <div className="relative">
+            <div className="relative flex items-center gap-4">
                 {/* Top Glow/Reflection Effect */}
                 <div className="absolute -top-px left-1/2 -translate-x-1/2 w-12 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent blur-[2px] z-20" />
 
@@ -53,7 +53,7 @@ export default function Navbar() {
                                 href={item.href}
                                 onClick={() => setActiveTab(item.id)}
                                 className={`
-                                    relative px-10 py-2 rounded-full text-[15px] font-semibold transition-all duration-300
+                                    relative px-8 py-2 rounded-full text-[15px] font-semibold transition-all duration-300
                                     ${isActive
                                         ? 'text-zinc-900 dark:text-white shadow-sm'
                                         : 'text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5'}
@@ -72,7 +72,7 @@ export default function Navbar() {
                     })}
 
                     {/* Theme Toggle - Integrated seamlessly */}
-                    <div className="ml-1 px-2">
+                    <div className="flex items-center px-4 pr-1">
                         <ThemeToggle />
                     </div>
                 </motion.div>
