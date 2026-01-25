@@ -112,9 +112,9 @@ export default function Timeline() {
                         {/* Sticky Bead - Z-Index boosted to 50 to ensure it's ABOVE the line */}
                         <div className="sticky top-1/2 -translate-y-1/2 z-50">
                             <div className="relative w-14 h-14 rounded-full border-2 border-zinc-200 dark:border-white/10 bg-white dark:bg-[#050505] shadow-[0_0_30px_rgba(59,130,246,0.3)] flex items-center justify-center">
-                                <div className="absolute inset-0 rounded-full bg-blue-500/10 animate-pulse" />
-                                <div className="relative w-8 h-8">
-                                    <Image src="/logo.png" alt="NS" fill className="object-contain" />
+                                <div className="absolute inset-0 rounded-full bg-blue-500/10 dark:bg-blue-500/5 animate-pulse" />
+                                <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-zinc-900/5 dark:bg-transparent flex items-center justify-center p-0.5">
+                                    <Image src="/logo.png" alt="NS" fill className="object-contain dark:invert-0" />
                                 </div>
                             </div>
                         </div>
@@ -164,8 +164,8 @@ export default function Timeline() {
                                 </h4>
 
                                 <motion.div
-                                    whileHover={{ scale: 1.01 }}
-                                    className="space-y-8 bg-white dark:bg-[#0d1117] border border-zinc-200 dark:border-white/10 rounded-3xl p-8 md:p-10 max-w-5xl shadow-2xl backdrop-blur-sm transition-colors duration-300"
+                                    whileHover={{ scale: 1.002 }}
+                                    className="space-y-8 bg-white/80 dark:bg-[#0d1117]/80 border border-zinc-200/50 dark:border-white/10 rounded-3xl p-8 md:p-10 max-w-5xl shadow-xl dark:shadow-2xl backdrop-blur-md transition-colors duration-300"
                                 >
                                     <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed max-w-4xl text-justify">
                                         {exp.description}
