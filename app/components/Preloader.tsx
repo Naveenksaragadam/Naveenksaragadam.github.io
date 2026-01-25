@@ -3,28 +3,34 @@ import { motion, AnimatePresence, animate } from 'framer-motion'
 import Marquee from './Marquee'
 import ScrambleText from './ScrambleText'
 import Odometer from './Odometer'
+import { useLoading } from './Providers'
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
+    const { loadingProgress } = useLoading()
     const [count, setCount] = useState(0)
     const [isVisible, setIsVisible] = useState(true)
 
     useEffect(() => {
-        // Use Framer Motion to animate the value from 0 to 100
-        // This ensures frame-perfect updates without janky intervals
-        const controls = animate(0, 100, {
-            duration: 1.5, // 1.5s for a brisk but readable load
-            ease: "linear",
+        // Animate the odometer value smoothly to whatever the current progress is
+        const controls = animate(count, loadingProgress, {
+            duration: 0.5,
+            ease: "easeOut",
             onUpdate: (value) => {
                 setCount(Math.floor(value))
-            },
-            onComplete: () => {
-                // Wait a moment at 100% before exiting
-                setTimeout(() => setIsVisible(false), 200)
             }
         })
 
+        // When progress reaches 100, wait a tiny beat and then hide the preloader
+        if (loadingProgress >= 100) {
+            const timeout = setTimeout(() => setIsVisible(false), 500)
+            return () => {
+                controls.stop()
+                clearTimeout(timeout)
+            }
+        }
+
         return () => controls.stop()
-    }, [])
+    }, [loadingProgress])
 
     return (
         <AnimatePresence mode="wait" onExitComplete={onComplete}>
@@ -59,7 +65,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                                 <ScrambleText text="SARAGADAM" duration={1.0} className="inline-flex" targetChars="A" />
                             </h1>
                         </div>
-                        <div className="sr-only">Loading Naveen Saragadam Portfolio</div>
+                        <div className="sr-only">Loading Naveen's data portfolio</div>
 
                         {/* Odometer */}
                         <div className="mt-4 flex items-center justify-center p-4">

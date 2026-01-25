@@ -35,9 +35,13 @@ export const useGitHub = () => useContext(GitHubContext)
 const LoadingContext = createContext<{
     isLoading: boolean
     setIsLoading: (value: boolean) => void
+    loadingProgress: number
+    setLoadingProgress: (value: number) => void
 }>({
     isLoading: true,
     setIsLoading: () => { },
+    loadingProgress: 0,
+    setLoadingProgress: () => { },
 })
 
 export const useLoading = () => useContext(LoadingContext)
@@ -135,6 +139,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
         fetchGitHubData()
     }, [])
 
+    const [loadingProgress, setLoadingProgress] = useState(0)
+
     const handleSetIsLoading = (value: boolean) => {
         setIsLoading(value)
         if (!value) {
@@ -144,7 +150,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <LoadingContext.Provider value={{ isLoading, setIsLoading: handleSetIsLoading }}>
+        <LoadingContext.Provider value={{
+            isLoading,
+            setIsLoading: handleSetIsLoading,
+            loadingProgress,
+            setLoadingProgress
+        }}>
             <GitHubContext.Provider value={{ stats, contributions, loading: ghLoading, error: ghError }}>
                 <ThemeProvider
                     attribute="class"

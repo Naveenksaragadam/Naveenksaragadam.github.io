@@ -14,7 +14,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
-  title: "Creative Developer Portfolio",
+  title: "Naveen's data portfolio",
   description: "A high-end scrollytelling personal portfolio.",
 };
 
