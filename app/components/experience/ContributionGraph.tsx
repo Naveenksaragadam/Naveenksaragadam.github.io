@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Star, GitCommit, GitFork, Loader2, Library } from 'lucide-react'
+import { Github, Loader2, Zap, Trophy, Library } from 'lucide-react'
 import CountUp from 'react-countup'
 import { useGitHub } from '../Providers'
 
@@ -58,6 +58,12 @@ export default function ContributionGraph() {
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
+                    whileHover={{
+                        scale: 1.05,
+                        y: -5,
+                        boxShadow: "0 20px 25px -5px rgb(16 185 129 / 0.15), 0 8px 10px -6px rgb(16 185 129 / 0.15)"
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     className="lg:col-span-2 bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-8 shadow-2xl overflow-hidden relative transition-colors duration-300"
                 >
                     {loading ? (
@@ -66,11 +72,20 @@ export default function ContributionGraph() {
                         </div>
                     ) : null}
 
-                    <div className="absolute top-0 right-0 p-8 text-right">
-                        <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
-                            <CountUp end={stats.totalContributions} duration={2} separator="," />
+                    <div className="absolute top-0 right-0 p-8 flex flex-col items-end gap-1">
+                        <div className="flex items-baseline gap-2">
+                            <span className="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight">
+                                <CountUp end={stats.totalContributions} duration={2} separator="," />
+                            </span>
+                            <span className="text-sm text-zinc-500 font-medium uppercase tracking-wider">Lifetime</span>
                         </div>
-                        <div className="text-xs text-zinc-500 uppercase tracking-wider">Last Year Total</div>
+
+                        <div className="flex items-center gap-2">
+                            <span className="text-lg font-bold text-emerald-500">
+                                <CountUp end={stats.lastYearContributions} separator="," />
+                            </span>
+                            <span className="text-xs text-zinc-400 font-medium uppercase tracking-wider">Last Year</span>
+                        </div>
                     </div>
 
                     <div className="flex items-center gap-4 mb-10">
@@ -125,8 +140,9 @@ export default function ContributionGraph() {
                                                             key={`${qIndex}-${w}-${d}`}
                                                             initial={{ opacity: 0, scale: 0 }}
                                                             animate={{ opacity: loading ? 0.2 : 1, scale: 1 }}
-                                                            transition={{ delay: (qIndex * 0.1) + (w * 0.01) + (d * 0.005) }}
-                                                            className={`w-3 h-3 rounded-sm ${loading ? 'bg-zinc-200 dark:bg-zinc-800' : contributionLevels[day.level]}`}
+                                                            whileHover={{ scale: 1.4, zIndex: 20 }}
+                                                            transition={{ delay: loading ? (qIndex * 0.1) + (w * 0.01) + (d * 0.005) : 0, type: "spring", stiffness: 400, damping: 10 }}
+                                                            className={`w-3 h-3 rounded-sm cursor-pointer ${loading ? 'bg-zinc-200 dark:bg-zinc-800' : contributionLevels[day.level]} hover:ring-2 hover:ring-emerald-400 dark:hover:ring-emerald-500 transition-all duration-200`}
                                                             title={loading ? undefined : `${day.count} contributions on ${day.date}`}
                                                         />
                                                     ))}
@@ -157,7 +173,8 @@ export default function ContributionGraph() {
                 <div className="space-y-4">
                     {/* Repositories */}
                     <motion.div
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={{ scale: 1.05, y: -5, boxShadow: "0 20px 25px -5px rgb(168 85 247 / 0.1), 0 8px 10px -6px rgb(168 85 247 / 0.1)" }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
                         className="bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-6 flex items-center justify-between transition-colors duration-300"
                     >
                         <div>
@@ -169,32 +186,36 @@ export default function ContributionGraph() {
                         <Library className="w-8 h-8 text-purple-500/50" />
                     </motion.div>
 
-                    {/* Forks */}
+                    {/* Current Streak */}
                     <motion.div
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={{ scale: 1.05, y: -5, boxShadow: "0 20px 25px -5px rgb(249 115 22 / 0.1), 0 8px 10px -6px rgb(249 115 22 / 0.1)" }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
                         className="bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-6 flex items-center justify-between transition-colors duration-300"
                     >
                         <div>
-                            <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Forks</div>
-                            <div className="text-4xl font-bold text-emerald-400">
-                                <CountUp end={stats.forks} duration={2} />
+                            <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Current Streak</div>
+                            <div className="text-4xl font-bold text-orange-500">
+                                <CountUp end={stats.currentStreak} duration={2} />
+                                <span className="text-lg text-zinc-400 ml-1">days</span>
                             </div>
                         </div>
-                        <GitFork className="w-8 h-8 text-emerald-500/50" />
+                        <Zap className="w-8 h-8 text-orange-500/50 fill-orange-500/30" />
                     </motion.div>
 
-                    {/* Stars */}
+                    {/* Longest Streak */}
                     <motion.div
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={{ scale: 1.05, y: -5, boxShadow: "0 20px 25px -5px rgb(59 130 246 / 0.1), 0 8px 10px -6px rgb(59 130 246 / 0.1)" }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
                         className="bg-white dark:bg-[#0d1117] rounded-3xl border border-zinc-200 dark:border-white/10 p-6 flex items-center justify-between transition-colors duration-300"
                     >
                         <div>
-                            <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Stars</div>
-                            <div className="text-4xl font-bold text-yellow-400">
-                                <CountUp end={stats.stars} duration={2} />
+                            <div className="text-zinc-500 dark:text-zinc-400 text-sm mb-1">Longest Streak</div>
+                            <div className="text-4xl font-bold text-blue-500">
+                                <CountUp end={stats.longestStreak} duration={2} />
+                                <span className="text-lg text-zinc-400 ml-1">days</span>
                             </div>
                         </div>
-                        <Star className="w-8 h-8 text-yellow-500/50 fill-yellow-500/30" />
+                        <Trophy className="w-8 h-8 text-blue-500/50 fill-blue-500/30" />
                     </motion.div>
                 </div>
             </div>

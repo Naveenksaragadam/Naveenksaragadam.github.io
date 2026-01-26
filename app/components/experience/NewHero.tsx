@@ -103,7 +103,18 @@ export default function NewHero() {
                             I'm Naveen, a <br />
                             creative <br />
                             <span className="relative inline-block mt-2">
-                                <span className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 blur-2xl opacity-20 dark:opacity-30" />
+                                <motion.span
+                                    animate={{
+                                        opacity: [0.2, 0.5, 0.2],
+                                        scale: [0.95, 1.15, 0.95],
+                                    }}
+                                    transition={{
+                                        duration: 6,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                    className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 blur-2xl opacity-20 dark:opacity-30"
+                                />
                                 <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 dark:from-purple-400 dark:via-pink-400 dark:to-orange-300 italic">engineer</span>
                             </span>
                         </h1>
@@ -168,7 +179,11 @@ export default function NewHero() {
                     ))}
 
                     {/* Decorative Elements */}
-                    <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px]" />
+                    <motion.div
+                        animate={{ opacity: [0.03, 0.08, 0.03] }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px]"
+                    />
                 </div>
             </div>
         </section>

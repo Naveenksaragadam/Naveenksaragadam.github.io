@@ -161,7 +161,7 @@ export default function GlobalMenu() {
                                                     {group.items.map((item) => (
                                                         <Link
                                                             key={item.name}
-                                                            href={item.href}
+                                                            href={item.href.startsWith('javascript:') ? '#' : item.href}
                                                             target={item.external ? "_blank" : undefined}
                                                             rel={item.external ? "noopener noreferrer" : undefined}
                                                             onClick={() => setIsOpen(false)}
