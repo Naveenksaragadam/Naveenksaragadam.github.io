@@ -8,7 +8,7 @@ import ThemeToggle from './ThemeToggle'
 
 const navItems = [
     { name: 'Home', href: '/', id: 'home' },
-    { name: 'Journey', href: '/experience', id: 'experience' },
+    { name: 'Journey', href: '/journey', id: 'journey' },
     { name: 'Work', href: '/work', id: 'work' },
 ]
 
@@ -37,7 +37,7 @@ export default function Navbar() {
 
         // simple pathname check for active tab
         if (pathname === '/work') setActiveTab('work')
-        else if (pathname === '/experience') setActiveTab('experience')
+        else if (pathname === '/journey') setActiveTab('journey')
         else setActiveTab('home')
 
         return () => unsubscribe()

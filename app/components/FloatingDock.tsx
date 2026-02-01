@@ -55,7 +55,7 @@ export default function FloatingDock() {
 
     const items = [
         { icon: Home, href: '/', label: 'Home' },
-        { icon: Map, href: '/experience', label: 'Journey' }, // Map icon for Journey
+        { icon: Map, href: '/journey', label: 'Journey' }, // Map icon for Journey
         { icon: Briefcase, href: '/#work', label: 'Projects' },
         { icon: Mail, href: 'mailto:naveen.saragadam@example.com', label: 'Contact' },
     ]
