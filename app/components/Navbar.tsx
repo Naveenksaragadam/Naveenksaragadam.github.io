@@ -54,8 +54,6 @@ export default function Navbar() {
             className="fixed top-6 left-1/2 z-50 pointer-events-none"
         >
             <div className="relative flex items-center gap-4">
-                {/* Top Glow/Reflection Effect */}
-                <div className={`absolute -top-px left-1/2 -translate-x-1/2 w-12 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent blur-[2px] z-20 ${forceDark ? 'opacity-100' : 'opacity-0 dark:opacity-100'} transition-opacity duration-300`} />
 
                 <motion.div
                     layout
