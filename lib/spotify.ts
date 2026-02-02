@@ -1,4 +1,3 @@
-import querystring from 'querystring';
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
@@ -17,10 +16,10 @@ const getAccessToken = async () => {
             Authorization: `Basic ${basic}`,
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: querystring.stringify({
+        body: new URLSearchParams({
             grant_type: 'refresh_token',
-            refresh_token,
-        }),
+            refresh_token: refresh_token || '',
+        }).toString(),
     });
 
     return response.json();
