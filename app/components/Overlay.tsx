@@ -18,16 +18,29 @@ const MaskedText = ({ children, delay = 0, className = "" }: { children: React.R
     )
 }
 
-import { MotionValue } from 'framer-motion'
+import { MotionValue, useMotionValueEvent } from 'framer-motion'
+import { useState } from 'react'
 
-const ScrollIndicator = ({ opacity }: { opacity: MotionValue<number> }) => {
+const ScrollIndicator = ({ opacity, scrollYProgress }: { opacity: MotionValue<number>, scrollYProgress: MotionValue<number> }) => {
+    const [isHidden, setIsHidden] = useState(false)
+
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        if (latest > 0.15) {
+            setIsHidden(true)
+        } else {
+            setIsHidden(false)
+        }
+    })
+
+    if (isHidden) return null;
+
     return (
         <motion.div
             style={{ opacity }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 3 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-auto"
         >
             <div className="w-[24px] h-[50px] rounded-full border-2 border-zinc-400/80 dark:border-white/80 flex justify-center pt-2 box-border shadow-sm">
                 <motion.div
@@ -108,7 +121,7 @@ export default function Overlay() {
                         />
                     </div>
                 </motion.div>
-                <ScrollIndicator opacity={opacity1} />
+                <ScrollIndicator opacity={opacity1} scrollYProgress={scrollYProgress} />
             </motion.div>
 
             {/* Section 2 - Bio (Right Aligned) */}

@@ -4,7 +4,7 @@ import NewHero from "../components/experience/NewHero"
 import Timeline from "../components/experience/Timeline"
 import Education from "../components/experience/Education"
 import ContributionGraph from "../components/experience/ContributionGraph"
-import BentoGrid from "../components/experience/BentoGrid"
+import BentoGrid from "../components/BentoGrid"
 import SectionSeparator from "../components/SectionSeparator"
 import Navbar from "../components/Navbar"
 

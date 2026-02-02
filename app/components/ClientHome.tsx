@@ -3,7 +3,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import ScrollyCanvas from "./ScrollyCanvas";
 import Overlay from "./Overlay";
-import Projects from "./Projects";
+import Projects from "./Projects"; // Keep import if needed later, or remove if unused. For now keeping to minimize breakage if referenced elsewhere.
+import BentoGrid from "./BentoGrid";
 import ScrollProgress from "./ScrollProgress";
 import Navbar from "./Navbar";
 import Logo from "./Logo";
@@ -45,7 +46,9 @@ export default function ClientHome() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
             >
-                <Projects />
+                {/* Replaced Projects with BentoGrid as requested */}
+                <BentoGrid />
+                {/* <Projects /> */}
             </motion.div>
 
         </main>

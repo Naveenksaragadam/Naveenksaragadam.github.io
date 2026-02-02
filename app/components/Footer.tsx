@@ -175,7 +175,7 @@ export default function Footer() {
                         <div className="space-y-8">
                             <h3 className="text-xs font-bold text-zinc-400 dark:text-white/40 uppercase tracking-[0.2em]">Specifics</h3>
                             <ul className="space-y-5">
-                                <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Guest Book</Link></li>
+                                <li><Link href="/guestbook" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Guest Book</Link></li>
                                 <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Bucket List</Link></li>
                                 <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Uses</Link></li>
                                 <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Attribution</Link></li>
