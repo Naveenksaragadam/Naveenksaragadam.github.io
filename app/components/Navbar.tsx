@@ -95,10 +95,6 @@ export default function Navbar() {
                     </div>
 
                     <div className="flex items-center gap-2 pr-1">
-                        {/* Theme Toggle */}
-                        <div className="w-[1px] h-4 bg-zinc-200 dark:bg-white/10 mx-1" />
-                        <ThemeToggle forceDark={forceDark} />
-
                         {/* Premium CTA: Book a Call (Pill-in-Pill) */}
                         <Link
                             href="/book"
@@ -117,6 +113,12 @@ export default function Navbar() {
 
                             <span className="relative z-10">Book a Call</span>
                         </Link>
+
+                        {/* Theme Toggle & Separator */}
+                        <div className="flex items-center gap-1">
+                            <div className="w-[1px] h-4 bg-zinc-200 dark:bg-white/10 mx-1" />
+                            <ThemeToggle forceDark={forceDark} />
+                        </div>
                     </div>
                 </motion.div>
             </div>
