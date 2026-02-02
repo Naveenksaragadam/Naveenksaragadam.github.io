@@ -11,14 +11,9 @@ export default function BookPage() {
     const [activeTab, setActiveTab] = useState<'book' | 'message'>('book')
 
     return (
-        <main className="min-h-screen bg-zinc-50 dark:bg-[#0a0a0a] selection:bg-rose-500/30">
+        <main className="min-h-screen selection:bg-rose-500/30">
             <Navbar />
 
-            {/* Background Effects */}
-            <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-sky-500/5 blur-[120px] rounded-full" />
-                <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/5 blur-[120px] rounded-full" />
-            </div>
 
             <div className="relative pt-32 pb-24 px-6">
                 <div className="max-w-5xl mx-auto">
@@ -89,8 +84,8 @@ export default function BookPage() {
                             <button
                                 onClick={() => setActiveTab('book')}
                                 className={`px-8 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${activeTab === 'book'
-                                        ? 'bg-white dark:bg-white/10 text-zinc-900 dark:text-white shadow-lg'
-                                        : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                                    ? 'bg-white dark:bg-white/10 text-zinc-900 dark:text-white shadow-lg'
+                                    : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
                                     }`}
                             >
                                 <Calendar size={16} />
@@ -99,8 +94,8 @@ export default function BookPage() {
                             <button
                                 onClick={() => setActiveTab('message')}
                                 className={`px-8 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${activeTab === 'message'
-                                        ? 'bg-white dark:bg-white/10 text-zinc-900 dark:text-white shadow-lg'
-                                        : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                                    ? 'bg-white dark:bg-white/10 text-zinc-900 dark:text-white shadow-lg'
+                                    : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
                                     }`}
                             >
                                 <MessageSquare size={16} />
