@@ -5,10 +5,6 @@ import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, Calendar, MessageSquare, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '../components/Navbar'
-import { InlineWidget } from 'react-calendly'
-
-// TODO: Replace with your actual Booking URL
-const CALENDLY_URL = "https://calendly.com/naveens-arizona"
 
 export default function BookPage() {
     const [activeTab, setActiveTab] = useState<'book' | 'message'>('book')
@@ -114,21 +110,17 @@ export default function BookPage() {
                             initial={{ opacity: 0, scale: 0.98, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             transition={{ duration: 0.5, type: "spring", bounce: 0.3 }}
-                            className="bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-white/5 rounded-[40px] shadow-2xl backdrop-blur-3xl overflow-hidden min-h-[700px] flex flex-col items-center justify-center p-2 relative group"
+                            className="bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-white/5 rounded-[40px] shadow-2xl backdrop-blur-3xl overflow-hidden min-h-[600px] flex flex-col items-center justify-center p-8 relative group"
                         >
                             {activeTab === 'book' ? (
-                                <div className="w-full h-full min-h-[650px] relative rounded-[32px] overflow-hidden">
-                                    <InlineWidget
-                                        url={CALENDLY_URL}
-                                        styles={{ height: '700px', width: '100%' }}
-                                        pageSettings={{
-                                            backgroundColor: '18181b', // Zinc 900
-                                            hideEventTypeDetails: false,
-                                            hideLandingPageDetails: false,
-                                            primaryColor: '38bdf8', // Sky 400
-                                            textColor: 'ffffff'
-                                        }}
-                                    />
+                                <div className="w-full h-full min-h-[600px] relative">
+                                    {/* Glassmorphic Overlay for Iframe Loading Area */}
+                                    <div className="absolute inset-x-8 top-8 bottom-8 rounded-[32px] bg-zinc-50/50 dark:bg-black/20 border border-dashed border-zinc-200 dark:border-white/5 flex flex-col items-center justify-center space-y-4">
+                                        <div className="w-16 h-16 rounded-full border-4 border-zinc-200 dark:border-white/10 border-t-sky-400 animate-spin" />
+                                        <p className="text-zinc-500 dark:text-white/40 font-medium tracking-tight italic font-serif">Loading your personalized experience...</p>
+                                    </div>
+                                    {/* actual iframe would go here */}
+                                    {/* <iframe src="https://calendly.com/your-profile" className="w-full h-full relative z-10 border-none" /> */}
                                 </div>
                             ) : (
                                 <div className="w-full max-w-lg space-y-8 py-12">
