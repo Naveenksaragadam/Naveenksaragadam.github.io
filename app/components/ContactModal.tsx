@@ -39,17 +39,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: "100%" }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="relative w-full max-w-lg bg-zinc-900/90 dark:bg-[#0a0a0a]/90 border border-white/10 rounded-t-[40px] rounded-b-[24px] overflow-hidden pointer-events-auto backdrop-blur-3xl shadow-[0_-20px_50px_-12px_rgba(0,0,0,0.5)] mb-4 touch-none"
+                            className="relative w-full max-w-lg bg-white/90 dark:bg-zinc-900/90 border border-zinc-200 dark:border-white/10 rounded-t-[40px] rounded-b-[24px] overflow-hidden pointer-events-auto backdrop-blur-3xl shadow-[0_-20px_50px_-12px_rgba(0,0,0,0.1)] dark:shadow-[0_-20px_50px_-12px_rgba(0,0,0,0.5)] mb-4 touch-none"
                         >
                             {/* Drag Handle (Visual) */}
-                            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-white/20 rounded-full" />
+                            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-zinc-300 dark:bg-white/20 rounded-full" />
 
                             {/* Header */}
                             <div className="p-8 pb-4 pt-10 flex items-center justify-between">
-                                <h2 className="text-3xl font-serif italic text-white/90">Get in touch</h2>
+                                <h2 className="text-3xl font-serif italic text-zinc-900 dark:text-white/90">Get in touch</h2>
                                 <button
                                     onClick={onClose}
-                                    className="p-2 rounded-full hover:bg-white/5 transition-colors text-white/40 hover:text-white"
+                                    className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors text-zinc-400 dark:text-white/40 hover:text-zinc-900 dark:hover:text-white"
                                 >
                                     <X size={20} />
                                 </button>
@@ -63,52 +63,52 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     <Link
                                         href="/book"
                                         onClick={onClose}
-                                        className="group p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300"
+                                        className="group p-6 bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-3xl hover:bg-zinc-100 dark:hover:bg-white/[0.08] hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
                                     >
-                                        <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                            <Calendar size={20} className="text-white/60" />
+                                        <div className="w-10 h-10 rounded-xl bg-white dark:bg-white/5 border border-zinc-100 dark:border-transparent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm dark:shadow-none">
+                                            <Calendar size={20} className="text-zinc-600 dark:text-white/60" />
                                         </div>
-                                        <h3 className="text-white font-medium mb-1">Book a Call</h3>
-                                        <p className="text-white/40 text-sm">Schedule a 30-min chat</p>
+                                        <h3 className="text-zinc-900 dark:text-white font-medium mb-1">Book a Call</h3>
+                                        <p className="text-zinc-500 dark:text-white/40 text-sm">Schedule a 30-min chat</p>
                                     </Link>
 
                                     {/* Email Me */}
                                     <Link
                                         href="mailto:naveens@arizona.edu"
-                                        className="group p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300"
+                                        className="group p-6 bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-3xl hover:bg-zinc-100 dark:hover:bg-white/[0.08] hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
                                     >
-                                        <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                            <Mail size={20} className="text-white/60" />
+                                        <div className="w-10 h-10 rounded-xl bg-white dark:bg-white/5 border border-zinc-100 dark:border-transparent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm dark:shadow-none">
+                                            <Mail size={20} className="text-zinc-600 dark:text-white/60" />
                                         </div>
-                                        <h3 className="text-white font-medium mb-1">Email Me</h3>
-                                        <p className="text-white/40 text-sm">naveens@arizona.edu</p>
+                                        <h3 className="text-zinc-900 dark:text-white font-medium mb-1">Email Me</h3>
+                                        <p className="text-zinc-500 dark:text-white/40 text-sm">naveens@arizona.edu</p>
                                     </Link>
                                 </div>
 
                                 {/* Message Bar */}
-                                <div className="group relative flex items-center justify-between p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/[0.08] transition-all cursor-pointer">
+                                <div className="group relative flex items-center justify-between p-5 bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-2xl hover:bg-zinc-100 dark:hover:bg-white/[0.08] transition-all cursor-pointer">
                                     <div className="flex items-center gap-4">
                                         <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                                            <MessageSquare size={16} className="text-blue-400" />
+                                            <MessageSquare size={16} className="text-blue-500 dark:text-blue-400" />
                                         </div>
-                                        <span className="text-white/70 font-medium">Or write me a message here</span>
+                                        <span className="text-zinc-600 dark:text-white/70 font-medium">Or write me a message here</span>
                                     </div>
-                                    <span className="text-white/30 text-xs">Tap to open</span>
+                                    <span className="text-zinc-400 dark:text-white/30 text-xs">Tap to open</span>
                                     {/* Progress background effect */}
-                                    <div className="absolute inset-0 rounded-2xl border-white/5 border-dashed border pointer-events-none" />
+                                    <div className="absolute inset-0 rounded-2xl border-zinc-300 dark:border-white/5 border-dashed border pointer-events-none" />
                                 </div>
 
                                 {/* Socials Footer */}
                                 <div className="pt-4 text-center">
-                                    <span className="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em] block mb-6">Connect on socials</span>
+                                    <span className="text-[10px] font-bold text-zinc-400 dark:text-white/20 uppercase tracking-[0.3em] block mb-6">Connect on socials</span>
                                     <div className="flex justify-center gap-8 pb-4">
-                                        <Link href="https://www.linkedin.com/in/naveen-saragadam/" target="_blank" className="text-white/40 hover:text-white transition-all transform hover:scale-110">
+                                        <Link href="https://www.linkedin.com/in/naveen-saragadam/" target="_blank" className="text-zinc-400 hover:text-zinc-900 dark:text-white/40 dark:hover:text-white transition-all transform hover:scale-110">
                                             <Linkedin size={22} strokeWidth={1.5} />
                                         </Link>
-                                        <Link href="https://github.com/naveenksaragadam" target="_blank" className="text-white/40 hover:text-white transition-all transform hover:scale-110">
+                                        <Link href="https://github.com/naveenksaragadam" target="_blank" className="text-zinc-400 hover:text-zinc-900 dark:text-white/40 dark:hover:text-white transition-all transform hover:scale-110">
                                             <Github size={22} strokeWidth={1.5} />
                                         </Link>
-                                        <Link href="mailto:naveens@arizona.edu" className="text-white/40 hover:text-white transition-all transform hover:scale-110">
+                                        <Link href="mailto:naveens@arizona.edu" className="text-zinc-400 hover:text-zinc-900 dark:text-white/40 dark:hover:text-white transition-all transform hover:scale-110">
                                             <Mail size={22} strokeWidth={1.5} />
                                         </Link>
                                     </div>
