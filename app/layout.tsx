@@ -8,6 +8,7 @@ import Logo from "./components/Logo";
 import GlobalMenu from "./components/GlobalMenu";
 import GlobalBackground from "./components/GlobalBackground";
 import { Analytics } from "@vercel/analytics/next";
+import ContactModalWrapper from "./components/ContactModalWrapper";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
@@ -31,6 +32,7 @@ export default function RootLayout({
             <GlobalBackground />
             {children}
             <Footer />
+            <ContactModalWrapper />
             <Logo />
             <GlobalMenu />
           </SmoothScroll>
@@ -40,3 +42,4 @@ export default function RootLayout({
     </html>
   );
 }
+

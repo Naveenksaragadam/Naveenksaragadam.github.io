@@ -1,14 +1,22 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter, ArrowRight } from 'lucide-react'
+import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
+import React, { useState } from 'react'
+import ContactModal from './ContactModal'
+import { useModal } from './Providers'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
+    const { setIsContactModalOpen } = useModal()
 
     return (
-        <footer className="relative z-10 w-full bg-zinc-50 dark:bg-[#050505] overflow-hidden transition-colors duration-300 border-t border-zinc-200 dark:border-white/5">
+        <footer className="relative z-10 w-full bg-zinc-50 dark:bg-[#050505] overflow-hidden transition-colors duration-300">
+            {/* Luminous Separator (Custom Line) */}
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-200 dark:via-white/20 to-transparent" />
+            <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-transparent via-zinc-300/30 dark:via-white/10 to-transparent blur-[1px]" />
             {/* Grainy Noise Overlay */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
@@ -29,9 +37,63 @@ export default function Footer() {
                         className="relative"
                     >
                         {/* Logo/Icon placeholder */}
-                        <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/10 dark:to-purple-500/10 rounded-full flex items-center justify-center border border-zinc-200 dark:border-white/5 backdrop-blur-3xl shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]">
-                            <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400">NS</span>
-                        </div>
+                        <Link
+                            href="/"
+                            className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/10 dark:to-purple-500/10 rounded-full flex items-center justify-center border border-zinc-200 dark:border-white/5 backdrop-blur-3xl shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)] p-4 hover:scale-110 transition-all duration-700 relative group"
+                        >
+                            {/* Atmospheric Bloom (Background Glow) */}
+                            <motion.div
+                                animate={{
+                                    scale: [1, 1.2, 1],
+                                    opacity: [0.3, 0.5, 0.3],
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                className="absolute inset-4 rounded-full bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                            />
+
+                            <div className="relative w-full h-full transition-all duration-700 group-hover:drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                                {/* Base Gradient Logo */}
+                                <motion.div
+                                    animate={{
+                                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                                    }}
+                                    transition={{
+                                        duration: 8,
+                                        repeat: Infinity,
+                                        ease: "linear"
+                                    }}
+                                    className="absolute inset-0 bg-gradient-to-r from-[#38bdf8] via-[#a855f7] to-[#fb7185] bg-[length:200%_200%]"
+                                    style={{
+                                        maskImage: 'url(/logo.png)',
+                                        WebkitMaskImage: 'url(/logo.png)',
+                                        maskSize: 'contain',
+                                        WebkitMaskSize: 'contain',
+                                        maskRepeat: 'no-repeat',
+                                        WebkitMaskRepeat: 'no-repeat',
+                                        maskPosition: 'center',
+                                        WebkitMaskPosition: 'center'
+                                    }}
+                                />
+                                {/* Luminous Highlight Overlay */}
+                                <div
+                                    className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                                    style={{
+                                        maskImage: 'url(/logo.png)',
+                                        WebkitMaskImage: 'url(/logo.png)',
+                                        maskSize: 'contain',
+                                        WebkitMaskSize: 'contain',
+                                        maskRepeat: 'no-repeat',
+                                        WebkitMaskRepeat: 'no-repeat',
+                                        maskPosition: 'center',
+                                        WebkitMaskPosition: 'center'
+                                    }}
+                                />
+                            </div>
+                        </Link>
                     </motion.div>
 
                     <motion.h2
@@ -50,15 +112,15 @@ export default function Footer() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="pt-10"
                     >
-                        <a
-                            href="mailto:naveen.saragadam@example.com"
+                        <button
+                            onClick={() => setIsContactModalOpen(true)}
                             className="group relative inline-flex items-center gap-4 px-10 py-5 bg-white dark:bg-white/5 hover:bg-zinc-50 dark:hover:bg-white/10 border border-zinc-200 dark:border-white/10 rounded-full transition-all duration-300 backdrop-blur-md hover:scale-105 hover:shadow-xl dark:hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)]"
                         >
                             <span className="text-xl font-medium text-zinc-900 dark:text-white tracking-tight">Get In Touch</span>
                             <div className="relative overflow-hidden w-8 h-8 rounded-full bg-zinc-900 dark:bg-white flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
                                 <ArrowRight size={18} className="text-white dark:text-black" />
                             </div>
-                        </a>
+                        </button>
                     </motion.div>
 
                     <motion.p
@@ -104,8 +166,8 @@ export default function Footer() {
                             <h3 className="text-xs font-bold text-zinc-400 dark:text-white/40 uppercase tracking-[0.2em]">General</h3>
                             <ul className="space-y-5">
                                 <li><Link href="/" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Home</Link></li>
-                                <li><Link href="/work" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Projects</Link></li>
-                                <li><Link href="/blog" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Blog</Link></li>
+                                <li><Link href="/journey" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Journey</Link></li>
+                                <li><Link href="/work" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Work</Link></li>
                             </ul>
                         </div>
 
@@ -124,7 +186,7 @@ export default function Footer() {
                         <div className="space-y-8">
                             <h3 className="text-xs font-bold text-zinc-400 dark:text-white/40 uppercase tracking-[0.2em]">More</h3>
                             <ul className="space-y-5">
-                                <li><a href="mailto:naveen.saragadam@example.com" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Book a call</a></li>
+                                <li><a href="mailto:naveens@arizona.edu" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Book a call</a></li>
                                 <li><a href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Links</a></li>
                                 <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">RSS</Link></li>
                                 <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300">Privacy</Link></li>
@@ -145,8 +207,8 @@ export default function Footer() {
                         <Link href="https://www.linkedin.com/in/naveen-saragadam/" target="_blank" className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300 transform hover:scale-110" aria-label="LinkedIn Profile">
                             <Linkedin size={20} />
                         </Link>
-                        <Link href="https://twitter.com" target="_blank" className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300 transform hover:scale-110" aria-label="Twitter Profile">
-                            <Twitter size={20} />
+                        <Link href="mailto:naveens@arizona.edu" className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300 transform hover:scale-110" aria-label="Email Me">
+                            <Mail size={20} />
                         </Link>
                     </div>
                 </div>

@@ -47,6 +47,16 @@ const LoadingContext = createContext<{
 
 export const useLoading = () => useContext(LoadingContext)
 
+const ModalContext = createContext<{
+    isContactModalOpen: boolean
+    setIsContactModalOpen: (value: boolean) => void
+}>({
+    isContactModalOpen: false,
+    setIsContactModalOpen: () => { },
+})
+
+export const useModal = () => useContext(ModalContext)
+
 
 // Helper to calculate streaks
 const calculateStreaks = (allDays: any[]) => {
@@ -121,6 +131,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     const [contributions, setContributions] = useState<ContributionDay[][]>([])
     const [ghLoading, setGhLoading] = useState(true)
     const [ghError, setGhError] = useState(false)
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
     const username = 'Naveenksaragadam'
 
@@ -277,15 +288,17 @@ export function Providers({ children }: { children: React.ReactNode }) {
             setLoadingProgress
         }}>
             <GitHubContext.Provider value={{ stats, contributions, loading: ghLoading, error: ghError }}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    storageKey="theme-preference-v1"
-                >
-                    <SystemThemeSync />
-                    {children}
-                </ThemeProvider>
+                <ModalContext.Provider value={{ isContactModalOpen, setIsContactModalOpen }}>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        storageKey="theme-preference-v1"
+                    >
+                        <SystemThemeSync />
+                        {children}
+                    </ThemeProvider>
+                </ModalContext.Provider>
             </GitHubContext.Provider>
         </LoadingContext.Provider>
     )

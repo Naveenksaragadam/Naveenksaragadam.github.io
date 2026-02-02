@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter } from 'lucide-react'
+import { Github, Linkedin, Mail } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useModal } from '../Providers'
 
 export default function NewHero() {
     const [activeIndex, setActiveIndex] = useState(0)
+    const { setIsContactModalOpen } = useModal()
 
     // Auto-rotate
     useEffect(() => {
@@ -149,9 +151,12 @@ export default function NewHero() {
                         <Link href="https://www.linkedin.com/in/naveen-saragadam/" target="_blank" className="p-3 rounded-full bg-zinc-100 dark:bg-white/5 hover:bg-zinc-200 dark:hover:bg-white/10 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300 group">
                             <Linkedin size={22} className="text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" strokeWidth={1.5} />
                         </Link>
-                        <Link href="https://twitter.com" target="_blank" className="p-3 rounded-full bg-zinc-100 dark:bg-white/5 hover:bg-zinc-200 dark:hover:bg-white/10 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300 group">
-                            <Twitter size={22} className="text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" strokeWidth={1.5} />
-                        </Link>
+                        <button
+                            onClick={() => setIsContactModalOpen(true)}
+                            className="p-3 rounded-full bg-zinc-100 dark:bg-white/5 hover:bg-zinc-200 dark:hover:bg-white/10 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300 group"
+                        >
+                            <Mail size={22} className="text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" strokeWidth={1.5} />
+                        </button>
                     </motion.div>
                 </motion.div>
 

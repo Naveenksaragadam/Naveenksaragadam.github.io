@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import {
@@ -15,6 +15,7 @@ import {
     X,
     ArrowRight
 } from 'lucide-react'
+import { useModal } from './Providers'
 
 interface MenuItem {
     name: string
@@ -31,7 +32,7 @@ const menuItems: { category: string; items: MenuItem[] }[] = [
             { name: 'Home', href: '/#home', icon: Home, description: 'Go to homepage' },
             { name: 'Projects', href: '/#work', icon: Briefcase, description: 'View my selected work' },
             { name: 'Blog', href: '/blog', icon: Command, description: 'Thoughts & stories' },
-            { name: 'Contact', href: '/#contact', icon: Mail, description: 'Get in touch' },
+            { name: 'Contact', href: 'contact-modal', icon: Mail, description: 'Get in touch' },
         ]
     },
     {
@@ -39,13 +40,26 @@ const menuItems: { category: string; items: MenuItem[] }[] = [
         items: [
             { name: 'LinkedIn', href: 'https://www.linkedin.com/in/naveen-saragadam/', icon: Linkedin, description: 'Professional network', external: true },
             { name: 'GitHub', href: 'https://github.com', icon: Github, description: 'Code repositories', external: true },
-            { name: 'Twitter', href: 'https://twitter.com', icon: Twitter, description: 'Thoughts & updates', external: true },
+            { name: 'Email', href: 'mailto:naveens@arizona.edu', icon: Mail, description: 'Direct contact', external: true },
         ]
     }
 ]
 
+function getSafeHref(href: string): string {
+    const trimmed = href.trim()
+    // Explicitly allow only safe protocols
+    if (trimmed.startsWith('/') ||
+        trimmed.startsWith('https://') ||
+        trimmed.startsWith('http://') ||
+        trimmed.startsWith('mailto:')) {
+        return trimmed
+    }
+    return '#'
+}
+
 export default function GlobalMenu() {
     const [isOpen, setIsOpen] = useState(false)
+    const { setIsContactModalOpen } = useModal()
     const [query, setQuery] = useState('')
 
     // Keyboard Shortcuts
@@ -73,13 +87,15 @@ export default function GlobalMenu() {
     }, [isOpen])
 
     // Filter Items
-    const filteredGroups = menuItems.map(group => ({
-        ...group,
-        items: group.items.filter(item =>
-            item.name.toLowerCase().includes(query.toLowerCase()) ||
-            item.description.toLowerCase().includes(query.toLowerCase())
-        )
-    })).filter(group => group.items.length > 0)
+    const filteredGroups = useMemo(() => {
+        return menuItems.map(group => ({
+            ...group,
+            items: group.items.filter(item =>
+                item.name.toLowerCase().includes(query.toLowerCase()) ||
+                item.description.toLowerCase().includes(query.toLowerCase())
+            )
+        })).filter(group => group.items.length > 0)
+    }, [query])
 
     return (
         <>
@@ -161,10 +177,15 @@ export default function GlobalMenu() {
                                                     {group.items.map((item) => (
                                                         <Link
                                                             key={item.name}
-                                                            href={item.href.startsWith('javascript:') ? '#' : item.href}
+                                                            href={getSafeHref(item.href)}
                                                             target={item.external ? "_blank" : undefined}
                                                             rel={item.external ? "noopener noreferrer" : undefined}
-                                                            onClick={() => setIsOpen(false)}
+                                                            onClick={() => {
+                                                                setIsOpen(false)
+                                                                if (item.href === 'contact-modal') {
+                                                                    setIsContactModalOpen(true)
+                                                                }
+                                                            }}
                                                             className="group flex items-center justify-between px-3 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
                                                         >
                                                             <div className="flex items-center gap-4">
