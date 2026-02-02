@@ -61,8 +61,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                 <div className="grid grid-cols-2 gap-4">
                                     {/* Book a Call */}
                                     <Link
-                                        href="https://calendly.com"
-                                        target="_blank"
+                                        href="/book"
+                                        onClick={onClose}
                                         className="group p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300"
                                     >
                                         <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
