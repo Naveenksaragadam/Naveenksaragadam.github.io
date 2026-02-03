@@ -401,7 +401,7 @@ export default function InterviewScheduler() {
                     primaryColor: 'ffffff',
                     textColor: 'ffffff'
                 }}
-                rootElement={typeof document !== 'undefined' ? document.getElementById("main-root") || document.body : undefined}
+                rootElement={typeof document !== 'undefined' ? document.getElementById("main-root") || document.body : null as unknown as HTMLElement}
                 isOpen={isBookingOpen}
                 onModalClose={() => setIsBookingOpen(false)}
             />
