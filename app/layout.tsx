@@ -6,6 +6,7 @@ import { Providers } from "./components/Providers";
 import Footer from "./components/Footer";
 import Logo from "./components/Logo";
 import GlobalMenu from "./components/GlobalMenu";
+import Navbar from "./components/Navbar";
 import GlobalBackground from "./components/GlobalBackground";
 import { Analytics } from "@vercel/analytics/next";
 import ContactModalWrapper from "./components/ContactModalWrapper";
@@ -35,6 +36,7 @@ export default function RootLayout({
             <ContactModalWrapper />
             <Logo />
             <GlobalMenu />
+            <Navbar />
           </SmoothScroll>
         </Providers>
         <Analytics />

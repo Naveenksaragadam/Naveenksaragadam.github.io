@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, Calendar, MessageSquare, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
-import Navbar from '../components/Navbar'
 import InterviewScheduler from '../components/InterviewScheduler'
 
 export default function BookPage() {
@@ -12,7 +11,6 @@ export default function BookPage() {
 
     return (
         <main className="min-h-screen bg-[#0a0a0a] selection:bg-white/20">
-            <Navbar />
 
             <div className="relative pt-32 pb-24 px-6">
                 <div className="max-w-6xl mx-auto">

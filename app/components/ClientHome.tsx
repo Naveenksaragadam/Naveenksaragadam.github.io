@@ -6,7 +6,6 @@ import Overlay from "./Overlay";
 import Projects from "./Projects"; // Keep import if needed later, or remove if unused. For now keeping to minimize breakage if referenced elsewhere.
 import BentoGrid from "./BentoGrid";
 import ScrollProgress from "./ScrollProgress";
-import Navbar from "./Navbar";
 import Logo from "./Logo";
 import Footer from "./Footer";
 import Noise from "./Noise";
@@ -31,7 +30,6 @@ export default function ClientHome() {
 
             <Noise />
             <ScrollProgress />
-            <Navbar />
 
             {/* 
         ScrollyCanvas loads images in background. 
