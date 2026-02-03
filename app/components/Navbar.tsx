@@ -82,7 +82,7 @@ export default function Navbar() {
                                     {isActive && (
                                         <motion.div
                                             layoutId="active-nav-pill"
-                                            className={`absolute inset-0 z-0 bg-zinc-100 dark:bg-white/5 rounded-full`}
+                                            className={`absolute inset-0 z-0 ${forceDark ? 'bg-white/10' : 'bg-zinc-100 dark:bg-white/5'} rounded-full`}
                                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                         />
                                     )}

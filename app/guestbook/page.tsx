@@ -1,7 +1,5 @@
 'use client'
 
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Send } from 'lucide-react'
@@ -11,8 +9,6 @@ export default function GuestbookPage() {
 
     return (
         <main className="min-h-screen selection:bg-rose-500/30">
-            <Navbar />
-
             <div className="relative pt-40 pb-24 px-6 min-h-[80vh] flex flex-col items-center justify-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -57,8 +53,6 @@ export default function GuestbookPage() {
                     </div>
                 </motion.div>
             </div>
-
-            <Footer />
         </main>
     )
 }

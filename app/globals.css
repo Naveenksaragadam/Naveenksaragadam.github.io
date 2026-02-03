@@ -2,17 +2,19 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #121212;
-  --scrollbar-thumb: rgba(0, 0, 0, 0.2);
-  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.4);
-}
-
-.dark {
+  /* Default to Dark Mode colors */
   --background: #121212;
   --foreground: #ededed;
   --scrollbar-thumb: rgba(255, 255, 255, 0.2);
   --scrollbar-thumb-hover: rgba(255, 255, 255, 0.4);
+}
+
+.light {
+  /* Optional Light Mode overrides */
+  --background: #ffffff;
+  --foreground: #121212;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.4);
 }
 
 body {

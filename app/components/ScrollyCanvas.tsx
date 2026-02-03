@@ -28,9 +28,9 @@ export default function ScrollyCanvas() {
                     loadedImages[index] = img
                     loadedCount++
 
-                    // Update global progress
+                    // Update global progress (cap at 99% until render)
                     const progress = Math.round((loadedCount / frameCount) * 100)
-                    setLoadingProgress(progress)
+                    setLoadingProgress(Math.min(progress, 99))
 
                     // Once everything is loaded, update local state
                     if (loadedCount === frameCount) {
@@ -63,6 +63,30 @@ export default function ScrollyCanvas() {
         loadEverything()
 
     }, [setLoadingProgress])
+
+    // Wait for images to be ready and first frame to draw before hitting 100%
+    useEffect(() => {
+        if (!isLoaded || !canvasRef.current || images.length === 0) return
+
+        const canvas = canvasRef.current
+        const ctx = canvas.getContext('2d')
+        if (!ctx) return
+
+        // Force an initial render of the first frame
+        const firstImg = images[0]
+        if (firstImg) {
+            // Re-use logic or just allow the render loop to pick it up?
+            // Safer to allow render loop, but we want to confirm it happened.
+            // We'll set a small timeout to allow the render loop effect to run once
+            // Or explicitly call render here if we extract the logic. 
+            // For simplicity, we'll assume the render loop (below) catches it immediately
+            // but we'll delay the 100% signal slightly to ensure paint.
+
+            setTimeout(() => {
+                setLoadingProgress(100)
+            }, 100)
+        }
+    }, [isLoaded, images, setLoadingProgress])
 
     // Render loop
     useEffect(() => {

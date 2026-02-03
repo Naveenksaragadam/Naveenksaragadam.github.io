@@ -136,10 +136,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
     const username = 'Naveenksaragadam'
 
     useEffect(() => {
-        const hasLoaded = sessionStorage.getItem('hasLoaded')
-        if (hasLoaded) {
-            setIsLoading(false)
-        }
+        // Removed sessionStorage check to ensure we always wait for 3D assets to load
+        // otherwise users see blank canvas on refresh.
 
         const fetchGitHubData = async () => {
             setGhLoading(true)
@@ -275,9 +273,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
     const handleSetIsLoading = (value: boolean) => {
         setIsLoading(value)
-        if (!value) {
-            sessionStorage.setItem('hasLoaded', 'true')
-        }
     }
 
     return (
@@ -292,8 +287,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="system"
-                        enableSystem
-                        storageKey="theme-preference-v1"
+                        enableSystem={true}
+                        storageKey="theme-preference-v2"
                     >
                         <SystemThemeSync />
                         {children}
