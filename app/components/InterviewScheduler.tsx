@@ -402,7 +402,7 @@ export default function InterviewScheduler() {
                     textColor: 'ffffff'
                 }}
                 rootElement={typeof document !== 'undefined' ? document.getElementById("main-root") || document.body : null as unknown as HTMLElement}
-                isOpen={isBookingOpen}
+                open={isBookingOpen}
                 onModalClose={() => setIsBookingOpen(false)}
             />
         </div>
